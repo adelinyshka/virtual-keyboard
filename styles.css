@@ -1,7 +1,115 @@
+/*цвет клавиш*/
+/*#003F91*/
+
+/*цвет букв*/
+/*#fff*/
+
+/*цвет клавиш при нажатии*/
+/*#357DED*/
+
+/*цвет букв при нажатии*/
+/*#fff*/
+
+/*фон #E5F4E3*/
+
+/*цвет окантовки поля*/
+/*#83C9F4*/
+
+/*body {*/
+/*	background: #ааа;*/
+/*}*/
+
+
+body{
+	background: #0d0e2b;
+}
+
 .keyboard-wrapper {
 	height: 500px;
 	width: 90%;
 	margin: 50px auto;
-	border: 5px solid black;
+	border: 1px dotted black;
 	display: block;
+}
+
+.title {
+	color: #357DED;
+	font-size: 21px;
+	font-family: sans-serif;
+	text-align: center;
+	margin: 26px;
+}
+
+.styled-textarea {
+	width: 92%;
+	height: 150px;
+	margin: 0px 30px;
+	text-align: left;
+	padding: 10px;
+	resize:vertical;
+	outline:none;
+	display: block;
+	color: #ffffff;
+	background: #282a43;
+	border-width: 3px;
+	border-radius: 6px;
+	font-size: 24px;
+	font-family: sans-serif;
+}
+
+#keyboard {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.k-key {
+	font-family: sans-serif;
+	font-weight: 500;
+	line-height: 40px;
+	text-align: center;
+	cursor: pointer;
+	user-select: none;
+	display: block;
+	width: 50px;
+	height: 50px;
+	color:  #fff;
+	background: #357DED;
+	margin: 6px;
+	padding: 5px;
+	float: left;
+	box-shadow: 5px 4px 0px #575871;
+	border-radius: 9px;
+
+
+}
+
+.k-key.active-letter {
+	background: #003F91;
+	box-shadow: none;
+}
+
+.k-key-space {
+	font-family: sans-serif;
+	font-weight: 500;
+	line-height: 50px;
+	text-align: center;
+	cursor: pointer;
+	user-select: none;
+	display: block;
+	width: 250px;
+	height: 50px;
+	color:  #fff;
+	background: #357DED;
+	margin: 6px;
+	padding: 5px;
+	box-shadow: 5px 4px 0px #575871;
+	border-radius: 9px;
+	/*float: left;*/
+	/*display: flex;*/
+	/*align-self: center;*/
+}
+
+.clear-fix {
+	clear: both;
+	width: 100%;
 }
