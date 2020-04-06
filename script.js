@@ -72,7 +72,6 @@ function init() {
 
 //определили где кнопки
 let imKey = document.querySelectorAll('.k-key');
-console.log(imKey);
 
 //функция для вывода
 function toTextarea() {
@@ -87,7 +86,7 @@ toTextarea();
 
 
 
-//добавила анимацию нажатиея на кнопочки
+//добавила анимацию по клику на кнопочку
 function letsAnimateButtons() {
 	document.querySelectorAll('.k-key').forEach(function (element) {
 		element.onclick = function (event) {
@@ -102,6 +101,19 @@ function letsAnimateButtons() {
 
 letsAnimateButtons();
 
+// добавить backSpace
+let backSpace = document.createElement('div');
+backSpace.classList.add('k-key');
+backSpace.style = 'width: 150px;'
+backSpace.innerHTML = 'BackSpace';
+row1.appendChild(backSpace);
+
+//сделать чтобы backSpace удалял
+
+
+backSpace.addEventListener('click', function () {
+
+})
 
 
 
