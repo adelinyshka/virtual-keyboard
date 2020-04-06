@@ -68,30 +68,39 @@ function init() {
 
 		init();
 
-//добавляем вывод по клику
+//добавляем в поле вывода по клику на вирт клаве
 
+//определили где кнопки
+let imKey = document.querySelectorAll('.k-key');
+console.log(imKey);
+
+//функция для вывода
 function toTextarea() {
-	document.querySelectorAll('.keyboardButtons > .row .k-key')
-	keyboardButtons.addEventListener('click', function (evt) {
-		console.log(evt.target.textContent);
-		textarea.value += evt.target.textContent;
-
+	imKey.forEach(function (x) {
+		x.addEventListener('click', function () {
+			textarea.value += x.textContent.trim();
+		})
 	});
-
-};
+}
 
 toTextarea();
 
-//делаем нажатие на кнопочки
-document.querySelectorAll('.k-key').forEach(function (element) {
-	element.onclick = function (event) {
 
-		document.querySelectorAll('.k-key').forEach(function (element) {
-			element.classList.remove('active-letter');
-		});
-		this.classList.add('active-letter');
-	}
-});
+
+//добавила анимацию нажатиея на кнопочки
+function letsAnimateButtons() {
+	document.querySelectorAll('.k-key').forEach(function (element) {
+		element.onclick = function (event) {
+
+			document.querySelectorAll('.k-key').forEach(function (element) {
+				element.classList.remove('active-letter');
+			});
+			this.classList.add('active-letter');
+		}
+	});
+}
+
+letsAnimateButtons();
 
 
 
