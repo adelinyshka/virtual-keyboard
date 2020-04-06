@@ -38,35 +38,96 @@ let keyboardButtons = document.createElement('div');
 keyboardButtons.classList.add('wrapper-buttons');
 imDiv.appendChild(keyboardButtons);
 
-// let keyQ = document.createElement('div');
-// keyQ.classList.add('k-key')
-// keyQ.textContent = 'q';
-// keyboardButtons.appendChild(keyQ);
 
-
-const keyRow1 = ['`','1','2','3','4','5','6','7','8','9','0','-','=',];
+const keysRow1 = ['`','1','2','3','4','5','6','7','8','9','0','-','=',];
 
 const keysRow2 = ['q','w','e','r','t','y','u','i','o','p','[',']',];
 
-//создан первый ряд для кнопочек
+const keysRow3 = ['a','s','d','f','g','h','j','k','l',';','""',' \\ ',];
+
+const keysRow4 = ['z','x','c','v','b','n','m', ',' , '.' , '/'];
+
+// const keysRow5 = ['Space'];
+
+//созданы ряды для кнопочек
 let row1 = document.createElement('div');
 row1.classList.add('row');
 keyboardButtons.appendChild(row1);
 
-// document.querySelector('row').append();
+let row2 = document.createElement('div');
+row2.classList.add('row');
+keyboardButtons.appendChild(row2);
+
+let row3 = document.createElement('div');
+row3.classList.add('row');
+keyboardButtons.appendChild(row3);
+
+let row4 = document.createElement('div');
+row4.classList.add('row');
+keyboardButtons.appendChild(row4);
+
+// let row5 = document.createElement('div');
+// row2.classList.add('row');
+// keyboardButtons.appendChild(row5);
+
+
 
 
 //добавляем кнопки в 1 ряд
 function init() {
 			let out = '';
-			for(let i=0; i<keyRow1.length; i++) {
-
-					out += '<div class = "k-key"> ' + keyRow1[i] + ' </div>'
+			for(let i=0; i<keysRow1.length; i++) {
+					out += '<div class = "k-key"> ' + keysRow1[i] + ' </div>'
 				}
-			document.querySelector('.row').innerHTML = out;
+		row1.innerHTML = out;
 		};
 
 		init();
+
+function init2() {
+	let out2 = '';
+	for(let i=0; i<keysRow2.length; i++) {
+
+		out2 += '<div class = "k-key"> ' + keysRow2[i] + ' </div>'
+	}
+	row2.innerHTML = out2;
+};
+
+init2();
+
+function init3() {
+	let out3 = '';
+	for(let i=0; i<keysRow3.length; i++) {
+
+		out3 += '<div class = "k-key"> ' + keysRow3[i] + ' </div>'
+	}
+	row3.innerHTML = out3;
+};
+
+init3();
+
+
+function init4() {
+	let out4 = '';
+	for(let i=0; i<keysRow4.length; i++) {
+
+		out4 += '<div class = "k-key"> ' + keysRow4[i] + ' </div>'
+	}
+	row4.innerHTML = out4;
+};
+
+init4();
+
+// function init5() {
+// 	let out5 = '';
+// 	for(let i=0; i<keysRow5.length; i++) {
+//
+// 		out5 += '<div class = "k-key"> ' + keysRow5[i] + ' </div>'
+// 	}
+// 	row5.innerHTML = out5;
+// };
+//
+// init5();
 
 //добавляем в поле вывода по клику на вирт клаве
 
@@ -86,23 +147,7 @@ toTextarea();
 
 
 
-//добавила анимацию по клику на кнопочку
-// function letsAnimateButtons() {
-// 	document.querySelectorAll('.k-key').forEach(function (element) {
-// 		element.onclick = function (event) {
-//
-// 			document.querySelectorAll('.k-key').forEach(function (element) {
-// 				element.classList.remove('active-letter');
-// 			});
-//
-// 			this.classList.add('active-letter');
-// 			this.classList.remove('active-letter');
-//
-// 		}
-// 	});
-// }
 
-// letsAnimateButtons();
 
 // добавить backSpace
 let backSpace = document.createElement('div');
@@ -122,6 +167,11 @@ backSpace.addEventListener('click', function () {
 	}
 	textarea.value = backspasedStirng;
 });
+
+
+
+
+//второй ряд кнопок
 
 
 
