@@ -79,11 +79,9 @@ body{
 	float: left;
 	box-shadow: 5px 4px 0px #575871;
 	border-radius: 9px;
-
-
 }
 
-.k-key.active-letter {
+.active-letter {
 	background: #003F91;
 	box-shadow: none;
 }

@@ -33,14 +33,15 @@ document.onload = function() {
 	textarea.focus();
 };
 
+//создана обертка для кнопочек
 let keyboardButtons = document.createElement('div');
 keyboardButtons.classList.add('wrapper-buttons');
 imDiv.appendChild(keyboardButtons);
 
-let keyQ = document.createElement('div');
-keyQ.classList.add('k-key')
-keyQ.textContent = 'q';
-keyboardButtons.appendChild(keyQ);
+// let keyQ = document.createElement('div');
+// keyQ.classList.add('k-key')
+// keyQ.textContent = 'q';
+// keyboardButtons.appendChild(keyQ);
 
 
 const keyRow1 = ['`','1','2','3','4','5','6','7','8','9','0','-','=',];
@@ -70,14 +71,27 @@ function init() {
 //добавляем вывод по клику
 
 function toTextarea() {
+	document.querySelectorAll('.keyboardButtons > .row .k-key')
 	keyboardButtons.addEventListener('click', function (evt) {
 		console.log(evt.target.textContent);
 		textarea.value += evt.target.textContent;
+
 	});
 
 };
 
 toTextarea();
+
+//делаем нажатие на кнопочки
+document.querySelectorAll('.k-key').forEach(function (element) {
+	element.onclick = function (event) {
+
+		document.querySelectorAll('.k-key').forEach(function (element) {
+			element.classList.remove('active-letter');
+		});
+		this.classList.add('active-letter');
+	}
+});
 
 
 
