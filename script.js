@@ -110,10 +110,15 @@ row1.appendChild(backSpace);
 
 //сделать чтобы backSpace удалял
 
-
 backSpace.addEventListener('click', function () {
+	let originalString = textarea.value;
+	let backspasedStirng = '';
 
-})
+	for(let i=0; i < originalString.length-1;i++) {
+		backspasedStirng += originalString[i];
+	}
+	textarea.value = backspasedStirng;
+});
 
 
 
