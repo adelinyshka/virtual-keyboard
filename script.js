@@ -87,19 +87,22 @@ toTextarea();
 
 
 //добавила анимацию по клику на кнопочку
-function letsAnimateButtons() {
-	document.querySelectorAll('.k-key').forEach(function (element) {
-		element.onclick = function (event) {
+// function letsAnimateButtons() {
+// 	document.querySelectorAll('.k-key').forEach(function (element) {
+// 		element.onclick = function (event) {
+//
+// 			document.querySelectorAll('.k-key').forEach(function (element) {
+// 				element.classList.remove('active-letter');
+// 			});
+//
+// 			this.classList.add('active-letter');
+// 			this.classList.remove('active-letter');
+//
+// 		}
+// 	});
+// }
 
-			document.querySelectorAll('.k-key').forEach(function (element) {
-				element.classList.remove('active-letter');
-			});
-			this.classList.add('active-letter');
-		}
-	});
-}
-
-letsAnimateButtons();
+// letsAnimateButtons();
 
 // добавить backSpace
 let backSpace = document.createElement('div');

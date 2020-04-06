@@ -79,6 +79,18 @@ body{
 	float: left;
 	box-shadow: 5px 4px 0px #575871;
 	border-radius: 9px;
+
+}
+
+.k-key:active {
+	background: #003F91;
+	animation: shadow 0.5s alternate;
+}
+
+@keyframes shadow {
+	from {box-shadow: 5px 4px 0px #575871;}
+	50% {box-shadow: 2px 2px 0px #575871;}
+	to {box-shadow: 0px 0px 0px #575871;}
 }
 
 .active-letter {
