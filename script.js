@@ -170,10 +170,16 @@ backSpace.addEventListener('click', function () {
 
 
 
+//enter
+let enter = document.createElement('div');
+enter.classList.add('k-key');
+enter.style = 'width: 150px;'
+enter.innerHTML = 'Enter';
+row3.appendChild(enter);
 
-//второй ряд кнопок
-
-
+enter.addEventListener('click',function () {
+	textarea.value+= '\n'
+});
 
 //
 // const ruKeyCodes = {
