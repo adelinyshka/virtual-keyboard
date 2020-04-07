@@ -1,19 +1,6 @@
 
-let flag = false;
-//на русском
-		const keyboard = [62, 49, 50, 51, 52, 53, 54, 55, 56, 57,
-			48, 45, 61, 1081, 1094, 1091, 1082, 1077, 1085, 1075,
-			1096, 1097, 1079, 1093, 1098, 1092, 1099, 1074, 1072, 1087,
-			1088, 1086, 1083, 1076, 1078, 1101, 1105, 93, 1103, 1095,
-			1089, 1084, 1080, 1090, 1100, 1073, 1102, 47, 32];
+	alert('Здравствуйте! Прошу вас оценить работу в пятницу, 11 апреля, не раньше, пожалуйста. Пока что не успела все сделать. Спасибо')
 
-
-
-let keyboard2 = [];
-document.onkeypress = function(event) {
-	keyboard2.push(event.charCode);
-	console.log(keyboard2);
-};
 
 //создать обертку для всего
 let imDiv = document.createElement('div');
@@ -24,18 +11,17 @@ imDiv.classList.add('keyboard-wrapper');
 //прикрепить на страницу
 document.body.appendChild(imDiv);
 
-//создать заголовок с инфо о том что создается в системе MacOS
-let title = document.createElement('h1');
-
-//добавить заголовок на стр
-imDiv.appendChild(title);
-
-//добавить заголовку текст
-title.innerText = 'Привет! Создано в MacOS! Некоторые комбинации клавиш для' +
-	' Windows могут не работать';
-
-//добавить заголовку стили
-title.classList.add('title');
+// //создать заголовок с инфо о том что создается в системе MacOS
+// let title = document.createElement('h1');
+//
+// //добавить заголовок на стр
+// imDiv.appendChild(title);
+//
+// //добавить заголовку текст
+// title.innerText = 'Привет! Создано в MacOS!';
+//
+// //добавить заголовку стили
+// title.classList.add('title');
 
 //создать и добавить поле для вывода символов
 let textarea = document.createElement('textarea');
@@ -50,8 +36,9 @@ let keyboardButtons = document.createElement('div');
 keyboardButtons.classList.add('wrapper-buttons');
 imDiv.appendChild(keyboardButtons);
 
-
+//символы на кнопках
 const keysRow1 = ['`','1','2','3','4','5','6','7','8','9','0','-','=',];
+//символы для data-key
 const keyboardEngRow1 = [96, 49, 50, 51, 52, 53, 54, 55, 56, 57, 48, 45, 61, ];
 
 const keysRow2 = ['q','w','e','r','t','y','u','i','o','p','[',']',];
@@ -63,7 +50,6 @@ const keyboardEngRow3 = [97, 115, 100, 102, 103, 104, 106, 107, 108, 59, 39, 92,
 const keysRow4 = ['z','x','c','v','b','n','m', ',' , '.' , '/'];
 const keyboardEngRow4 = [ 122, 120, 99, 118, 98, 110, 109, 44, 46, 47, 32];
 
-// const keysRow5 = ['Space'];
 
 //созданы ряды для кнопочек
 let row1 = document.createElement('div');
@@ -101,7 +87,7 @@ function init(buttonArr, keyCode, rowToInsert, additionButton) {
 	}
 };
 
-
+// генерация кнопок
 
 init(keysRow1,keyboardEngRow1,row1);
 
@@ -112,7 +98,7 @@ init(keysRow3,keyboardEngRow3,row3, '<div class = "k-key" style="width: 150px;" 
 init(keysRow4,keyboardEngRow4,row4, '<div class = "k-key" style="width: 150px;" data-key="16">Shift</div>');
 
 
-// функция для генерации клавы с большими буквами
+// функция для генерации больших букв
 function makeCaps(array) {
 	let x = array.join('');
 	let z=  x.toUpperCase();
@@ -123,15 +109,33 @@ function makeCaps(array) {
 //добавляем в поле вывода по клику на вирт клаве
 
 //определили где кнопки
+//любая кнопка
 let imKey = document.querySelectorAll('.k-key');
+
 let tab = document.querySelector('div[data-key="9"]');
+
 let caps = document.querySelector('div[data-key="20"]');
 
-let bigLettersRow2 = makeCaps(keysRow2);
-let bigLettersRow3 = makeCaps(keysRow3);
-let bigLettersRow4 = makeCaps(keysRow4);
 
 
+// добавить backSpace
+let backSpace = document.createElement('div');
+backSpace.classList.add('k-key');
+backSpace.style = 'width: 150px;'
+backSpace.innerHTML = 'BackSpace';
+row1.appendChild(backSpace);
+
+//enter
+let enter = document.createElement('div');
+enter.classList.add('k-key');
+enter.style = 'width: 150px;'
+enter.innerHTML = 'Enter';
+row3.appendChild(enter);
+
+
+enter.addEventListener('click',function () {
+	textarea.value+= '\n'
+});
 
 // функция для вывода значений по клику в поле
 function toTextarea() {
@@ -142,21 +146,28 @@ function toTextarea() {
 			//проверка на таб
 			if(x === tab){
 				textarea.value += '\t';
+				textarea.focus();
+				tab.classList.add('.active-letter');
+				function removeActive() {
+					tab.classList.remove('active-letter');
+					textarea.focus();
+				}
+				setTimeout(removeActive,  300);
+				textarea.focus();
 
 				//проверка на капс
 			} else if (x === caps) {
 				caps.classList.toggle('active-letter');
+
 				textarea.value = textarea.value;
 				textarea.focus();
 			}
 
-
-
 			else
-		{
+			{
 			textarea.value += x.textContent.trim();
 			textarea.focus();
-		}
+			}
 
 
 	})
@@ -167,32 +178,15 @@ function toTextarea() {
 toTextarea();
 
 
-// добавить backSpace
-let backSpace = document.createElement('div');
-backSpace.classList.add('k-key');
-backSpace.style = 'width: 150px;'
-backSpace.innerHTML = 'BackSpace';
-row1.appendChild(backSpace);
 
 //сделать чтобы backSpace удалял
 backSpace.addEventListener('click', function () {
 
 	if (textarea.value.length > 0) {
 		textarea.value = textarea.value.slice(0, -1);
+		textarea.focus();
 	}
 });
-
-//enter
-let enter = document.createElement('div');
-enter.classList.add('k-key');
-enter.style = 'width: 150px;'
-enter.innerHTML = 'Enter';
-row3.appendChild(enter);
-
-enter.addEventListener('click',function () {
-	textarea.value+= '\n'
-});
-
 
 
 
@@ -214,89 +208,80 @@ document.onkeypress = function(event) {
 };
 
 
-const ruKeyCodes = {
-	81: 'й',
-	87: 'ц',
-	69: 'у',
-	82: 'к',
-	84: 'е',
-	89: 'н',
-	85: 'г',
-	73: 'ш',
-	79: 'щ',
-	80: 'з',
-	219: 'х',
-	221: 'ъ',
-	65: 'ф',
-	83: 'ы',
-	68: 'в',
-	70: 'а',
-	71: 'п',
-	72: 'р',
-	74: 'о',
-	75: 'л',
-	76: 'д',
-	186: 'ж',
-	222: 'э',
-	90: 'я',
-	88: 'ч',
-	67: 'с',
-	86: 'м',
-	66: 'и',
-	78: 'т',
-	77: 'ь',
-	188: 'б',
-	190: 'ю',
-	192: 'ё',
-	32: ' ',
-	91: '', // left cmd
-	9:'', //tab
-	20:'',//CAPS
-	16:'',//shift
-	17: '',//cntrl
-	18: '',//alt left + right
-	93:'',//right cmd
-};
+// капс
 
-const enKeyCodes = {
-	81: 'q',
-	87: 'w',
-	69: 'e',
-	82: 'r',
-	84: 't',
-	89: 'y',
-	85: 'u',
-	73: 'i',
-	79: 'o',
-	80: 'p',
-	65: 'a',
-	83: 's',
-	68: 'd',
-	70: 'f',
-	71: 'g',
-	72: 'h',
-	74: 'j',
-	75: 'k',
-	76: 'l',
-	90: 'z',
-	88: 'x',
-	67: 'c',
-	86: 'v',
-	66: 'b',
-	78: 'n',
-	77: 'm',
-	32: ' ',
-	91: '', // left cmd
-	9:'', //tab
-	20:'',//CAPS
-	16:'',//shift
-	17: '',//cntrl
-	18: '',//alt left + right
-	93:'',//right cmd
-};
+//генерация кнопок с большими буквами
+let bigLettersRow2 = makeCaps(keysRow2);
+let bigLettersRow3 = makeCaps(keysRow3);
+let bigLettersRow4 = makeCaps(keysRow4);
 
 
+function beBig() {
+	init(keysRow1,keyboardEngRow1,row1);
+
+	init(bigLettersRow2,keyboardEngRow2,row2, '<div class = "k-key" style="width: 150px;" data-key="9">Tab</div>');
+
+	init(bigLettersRow3,keyboardEngRow3,row3, '<div class = "k-key active-letter " style="width: 150px;" data-key="20">Caps Lock</div>');
+	bigLettersRow3.appendChild(enter);
+
+	init(bigLettersRow4,keyboardEngRow4,row4, '<div class = "k-key" style="width: 150px;" data-key="16">Shift</div>');
+}
+
+function beSmall() {
+	init(keysRow1,keyboardEngRow1,row1);
+
+	init(keysRow2,keyboardEngRow2,row2, '<div class = "k-key" style="width: 150px;" data-key="9">Tab</div>');
+
+	init(keysRow3,keyboardEngRow3,row3, '<div class = "k-key" style="width: 150px;" data-key="20">Caps Lock</div>');
+
+	init(keysRow4,keyboardEngRow4,row4, '<div class = "k-key" style="width: 150px;" data-key="16">Shift</div>');
+}
+
+let shift = document.querySelector('[data-key="16"]');
+
+//подсветка для shift
+addEventListener('keydown', function (event) {
+	if(event.shiftKey ){
+		shift.classList.add('active-letter');
+
+		function removeActive() {
+			shift.classList.remove('active-letter');
+			textarea.focus();
+		}
+		setTimeout(removeActive,  300);
+		textarea.focus();
+	}
+
+	// todo сделать смену цвета кнопки при клике по табу
+	if(event.code === 'Tab' ){
+		console.log('imTab')
+	}
+});
+
+//создаем 5 ряд кнопок
+
+//cntr
+//win
+//alt
+//space
+//alt
+//влево
+//вниз
+//вправо
+
+
+// caps.addEventListener('click', function () {
+// 	init(keysRow1,keyboardEngRow1,row1);
 //
+// 	init(bigLettersRow2,keyboardEngRow2,row2, '<div class = "k-key" style="width: 150px;" data-key="9">Tab</div>');
+//
+// 	init(bigLettersRow3,keyboardEngRow3,row3, '<div class = "k-key" style="width: 150px;" data-key="20">Caps Lock</div>');
+//
+// 	init(bigLettersRow4,keyboardEngRow4,row4, '<div class = "k-key" style="width: 150px;" data-key="16">Shift</div>');
+//
+// });
+
+
 //
 // //на engl
 // 		let keyboardEnglish = [167, 49, 50, 51, 52, 53, 54, 55, 56, 57,
@@ -313,68 +298,86 @@ const enKeyCodes = {
 // 			1089, 1084, 1080, 1090, 1100, 1073, 1102, 47, 32];
 //
 
-
-// //анимировать буквы
-// //сделать вывод по нажатию с клавы
-// //при нажатии дажи на 3 клавиши - все подсвчеиваются
 //
-// //сделать вывод по нажатию мышкой на символы
-// //символы shift/caps/alt/cmd - при нажатии мышкой остаются подсвеченными
+// const ruKeyCodes = {
+// 	81: 'й',
+// 	87: 'ц',
+// 	69: 'у',
+// 	82: 'к',
+// 	84: 'е',
+// 	89: 'н',
+// 	85: 'г',
+// 	73: 'ш',
+// 	79: 'щ',
+// 	80: 'з',
+// 	219: 'х',
+// 	221: 'ъ',
+// 	65: 'ф',
+// 	83: 'ы',
+// 	68: 'в',
+// 	70: 'а',
+// 	71: 'п',
+// 	72: 'р',
+// 	74: 'о',
+// 	75: 'л',
+// 	76: 'д',
+// 	186: 'ж',
+// 	222: 'э',
+// 	90: 'я',
+// 	88: 'ч',
+// 	67: 'с',
+// 	86: 'м',
+// 	66: 'и',
+// 	78: 'т',
+// 	77: 'ь',
+// 	188: 'б',
+// 	190: 'ю',
+// 	192: 'ё',
+// 	32: ' ',
+// 	91: '', // left cmd
+// 	9:'', //tab
+// 	20:'',//CAPS
+// 	16:'',//shift
+// 	17: '',//cntrl
+// 	18: '',//alt left + right
+// 	93:'',//right cmd
+// };
 //
-//
-// //использовать es6
-// //проверять ошибки в консоли
-// //стили привести в соотвествие с код-гайдом
-//
+// const enKeyCodes = {
+// 	81: 'q',
+// 	87: 'w',
+// 	69: 'e',
+// 	82: 'r',
+// 	84: 't',
+// 	89: 'y',
+// 	85: 'u',
+// 	73: 'i',
+// 	79: 'o',
+// 	80: 'p',
+// 	65: 'a',
+// 	83: 's',
+// 	68: 'd',
+// 	70: 'f',
+// 	71: 'g',
+// 	72: 'h',
+// 	74: 'j',
+// 	75: 'k',
+// 	76: 'l',
+// 	90: 'z',
+// 	88: 'x',
+// 	67: 'c',
+// 	86: 'v',
+// 	66: 'b',
+// 	78: 'n',
+// 	77: 'm',
+// 	32: ' ',
+// 	91: '', // left cmd
+// 	9:'', //tab
+// 	20:'',//CAPS
+// 	16:'',//shift
+// 	17: '',//cntrl
+// 	18: '',//alt left + right
+// 	93:'',//right cmd
+// };
 
-
-
-// caps.addEventListener('click', function () {
-//
-// 	if(flag == false) {
-// 		this.classList.add('active-letter');
-// 		beBig();
-// 		flag = true;
-//
-// 	} else {
-// 		console.log('hey')
-// 		this.classList.remove('active-letter');
-// 		beSmall();
-// 		flag = false;
-// 	}
-//
-// });
-
-
-function beBig() {
-	init(keysRow1,keyboardEngRow1,row1);
-
-	init(bigLettersRow2,keyboardEngRow2,row2, '<div class = "k-key" style="width: 150px;" data-key="9">Tab</div>');
-
-	init(bigLettersRow3,keyboardEngRow3,row3, '<div class = "k-key active-letter " style="width: 150px;" data-key="20">Caps Lock</div>');
-
-	init(bigLettersRow4,keyboardEngRow4,row4, '<div class = "k-key" style="width: 150px;" data-key="16">Shift</div>');
-}
-
-function beSmall() {
-	init(keysRow1,keyboardEngRow1,row1);
-
-	init(keysRow2,keyboardEngRow2,row2, '<div class = "k-key" style="width: 150px;" data-key="9">Tab</div>');
-
-	init(keysRow3,keyboardEngRow3,row3, '<div class = "k-key" style="width: 150px;" data-key="20">Caps Lock</div>');
-
-	init(keysRow4,keyboardEngRow4,row4, '<div class = "k-key" style="width: 150px;" data-key="16">Shift</div>');
-}
-
-//
-// caps.addEventListener('click', function () {
-// 	init(keysRow1,keyboardEngRow1,row1);
-//
-// 	init(bigLettersRow2,keyboardEngRow2,row2, '<div class = "k-key" style="width: 150px;" data-key="9">Tab</div>');
-//
-// 	init(bigLettersRow3,keyboardEngRow3,row3, '<div class = "k-key" style="width: 150px;" data-key="20">Caps Lock</div>');
-//
-// 	init(bigLettersRow4,keyboardEngRow4,row4, '<div class = "k-key" style="width: 150px;" data-key="16">Shift</div>');
-//
-// });
 

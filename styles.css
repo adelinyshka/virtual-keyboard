@@ -19,6 +19,9 @@
 /*	background: #ааа;*/
 /*}*/
 
+.active-letter2 {
+	background: red;
+}
 
 body{
 	background: #0d0e2b;
