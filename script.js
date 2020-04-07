@@ -1,4 +1,23 @@
 
+
+//на русском
+		const keyboard = [62, 49, 50, 51, 52, 53, 54, 55, 56, 57,
+			48, 45, 61, 1081, 1094, 1091, 1082, 1077, 1085, 1075,
+			1096, 1097, 1079, 1093, 1098, 1092, 1099, 1074, 1072, 1087,
+			1088, 1086, 1083, 1076, 1078, 1101, 1105, 93, 1103, 1095,
+			1089, 1084, 1080, 1090, 1100, 1073, 1102, 47, 32];
+
+// //на engl
+		let keyboardEnglish = [96, 49, 50, 51, 52, 53, 54, 55, 56, 57,
+			48, 45, 61,
+
+			113, 119, 101, 114, 116, 121, 117, 105, 111, 112,
+			91, 93, 97, 115, 100, 102, 103, 104, 106, 107, 108, 59, 39, 92,
+			96, 122, 120, 99, 118, 98, 110, 109, 44, 46, 47, 32];
+
+
+
+
 //создать обертку для всего
 let imDiv = document.createElement('div');
 
@@ -38,6 +57,7 @@ imDiv.appendChild(keyboardButtons);
 
 
 const keysRow1 = ['`','1','2','3','4','5','6','7','8','9','0','-','=',];
+const keyboardEngRow1 = [96, 49, 50, 51, 52, 53, 54, 55, 56, 57, 48, 45, 61, ];
 
 const keysRow2 = ['q','w','e','r','t','y','u','i','o','p','[',']',];
 
@@ -75,7 +95,7 @@ keyboardButtons.appendChild(row4);
 function init() {
 			let out = '';
 			for(let i=0; i<keysRow1.length; i++) {
-					out += '<div class = "k-key"> ' + keysRow1[i] + ' </div>'
+					out += '<div class = "k-key" data-key="' +keyboardEngRow1[i] + '"' +'>' + keysRow1[i] + ' </div>'
 				}
 		row1.innerHTML = out;
 		};
@@ -140,10 +160,7 @@ function toTextarea() {
 		})
 	});
 }
-
 toTextarea();
-
-
 
 
 
@@ -182,88 +199,88 @@ enter.addEventListener('click',function () {
 
 
 
-//
-// const ruKeyCodes = {
-// 	81: 'й',
-// 	87: 'ц',
-// 	69: 'у',
-// 	82: 'к',
-// 	84: 'е',
-// 	89: 'н',
-// 	85: 'г',
-// 	73: 'ш',
-// 	79: 'щ',
-// 	80: 'з',
-// 	219: 'х',
-// 	221: 'ъ',
-// 	65: 'ф',
-// 	83: 'ы',
-// 	68: 'в',
-// 	70: 'а',
-// 	71: 'п',
-// 	72: 'р',
-// 	74: 'о',
-// 	75: 'л',
-// 	76: 'д',
-// 	186: 'ж',
-// 	222: 'э',
-// 	90: 'я',
-// 	88: 'ч',
-// 	67: 'с',
-// 	86: 'м',
-// 	66: 'и',
-// 	78: 'т',
-// 	77: 'ь',
-// 	188: 'б',
-// 	190: 'ю',
-// 	192: 'ё',
-// 	32: ' ',
-// 	// 91: '', // left cmd
-// 	// 9:'', //tab
-// 	// 20:'',//CAPS
-// 	// 16:'',//shift
-// 	// 17: '',//cntrl
-// 	// 18: '',//alt left + right
-// 	// 93:'',//right cmd
-// };
-//
-// const enKeyCodes = {
-// 	81: 'q',
-// 	87: 'w',
-// 	69: 'e',
-// 	82: 'r',
-// 	84: 't',
-// 	89: 'y',
-// 	85: 'u',
-// 	73: 'i',
-// 	79: 'o',
-// 	80: 'p',
-// 	65: 'a',
-// 	83: 's',
-// 	68: 'd',
-// 	70: 'f',
-// 	71: 'g',
-// 	72: 'h',
-// 	74: 'j',
-// 	75: 'k',
-// 	76: 'l',
-// 	90: 'z',
-// 	88: 'x',
-// 	67: 'c',
-// 	86: 'v',
-// 	66: 'b',
-// 	78: 'n',
-// 	77: 'm',
-// 	32: ' ',
-// 	// 91: '', // left cmd
-// 	// 9:'', //tab
-// 	// 20:'',//CAPS
-// 	// 16:'',//shift
-// 	// 17: '',//cntrl
-// 	// 18: '',//alt left + right
-// 	// 93:'',//right cmd
-// };
-//
+
+const ruKeyCodes = {
+	81: 'й',
+	87: 'ц',
+	69: 'у',
+	82: 'к',
+	84: 'е',
+	89: 'н',
+	85: 'г',
+	73: 'ш',
+	79: 'щ',
+	80: 'з',
+	219: 'х',
+	221: 'ъ',
+	65: 'ф',
+	83: 'ы',
+	68: 'в',
+	70: 'а',
+	71: 'п',
+	72: 'р',
+	74: 'о',
+	75: 'л',
+	76: 'д',
+	186: 'ж',
+	222: 'э',
+	90: 'я',
+	88: 'ч',
+	67: 'с',
+	86: 'м',
+	66: 'и',
+	78: 'т',
+	77: 'ь',
+	188: 'б',
+	190: 'ю',
+	192: 'ё',
+	32: ' ',
+	91: '', // left cmd
+	9:'', //tab
+	20:'',//CAPS
+	16:'',//shift
+	17: '',//cntrl
+	18: '',//alt left + right
+	93:'',//right cmd
+};
+
+const enKeyCodes = {
+	81: 'q',
+	87: 'w',
+	69: 'e',
+	82: 'r',
+	84: 't',
+	89: 'y',
+	85: 'u',
+	73: 'i',
+	79: 'o',
+	80: 'p',
+	65: 'a',
+	83: 's',
+	68: 'd',
+	70: 'f',
+	71: 'g',
+	72: 'h',
+	74: 'j',
+	75: 'k',
+	76: 'l',
+	90: 'z',
+	88: 'x',
+	67: 'c',
+	86: 'v',
+	66: 'b',
+	78: 'n',
+	77: 'm',
+	32: ' ',
+	91: '', // left cmd
+	9:'', //tab
+	20:'',//CAPS
+	16:'',//shift
+	17: '',//cntrl
+	18: '',//alt left + right
+	93:'',//right cmd
+};
+
 // textarea.addEventListener('keydown', (evt) => {
 // 	evt.preventDefault();
 //
@@ -410,3 +427,65 @@ enter.addEventListener('click',function () {
 // });
 
 
+// // переключает цвет кнопки
+// document.querySelectorAll('wrapper-buttons .row .k-key').forEach(function (element) {
+// 	element.onclick = function (event) {
+//
+// 		document.querySelectorAll('wrapper-buttons .row .k-key').forEach(function (element) {
+// 			element.classList.remove('active-letter');
+// 		});
+//
+// 		this.classList.add('active-letter');
+// 	}
+// });
+
+// //при нажатии удалить у всех элементов стиль
+
+// document.onkeypress = function(event) {
+	// if(event.keyCode == )
+
+	//
+	// console.log(event.keyCode)
+	// console.log(element.getAttribute('data-key'));
+
+	// document.querySelectorAll('.k-key').forEach(function (element) {
+	//
+	//
+	//
+	// 	console.log(element.getAttribute('data-key'))
+	//
+	// })
+
+
+
+	// document.querySelectorAll('wrapper-buttons .row .k-key').forEach(function (element) {
+	// 	console.log('wrapper-buttons .row .k-key');
+	// 	element.classList.remove('active-letter');
+	//
+	// });
+	//
+	// document.querySelector('wrapper-buttons .row .k-key [data="'+event.keyCode+'"]').classList.add('active-letter');
+// };
+
+// выделение кнопки на вирт клаве по клику на наст клаву
+// при нажатии на кнопку на настоящей клаве
+// я прохожу по всем кнопкам и проверяю у какой кнопки есть такой же event.key-code
+// если есть такой - то добавляю класс
+// как удалить класс после добавления?
+// как
+
+document.onkeypress = function(event) {
+	document.querySelectorAll('.k-key').forEach(function (element) {
+		// element.classList.remove('active-letter');
+		console.log(document.querySelector('.k-key[data-key="'+event.keyCode+'"]'));
+		console.log(event.keyCode);
+		console.log(element.hasAttribute('data-key="'+event.keyCode+'"'));
+		// console.log(event);
+		// if(document.querySelector('.k-key[data-key="' +keyboardEngRow1[i] + ' "] ' == event.keyCode) {
+		//
+		//
+		// 	document.querySelector('.k-key[data="'+event.keyCode+'"]').classList.add('active-letter');
+		// }
+	});
+
+};

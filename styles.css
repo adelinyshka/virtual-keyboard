@@ -82,22 +82,22 @@ body{
 	border: 2px solid transparent;
 }
 
-.k-key:active {
-	background: #003F91;
-	animation: shadow 0.2s alternate;
-}
+/*.k-key:active {*/
+/*	background: #003F91;*/
+/*	animation: shadow 0.2s alternate;*/
+/*}*/
 
-@keyframes shadow {
-	from {box-shadow: 5px 4px 0px #575871;
-		border: 2px solid transparent;}
-	50% {box-shadow: 2px 2px 0px #575871;
-		border: 2px solid rgba(87, 88, 113, 0.61);}
-	to {box-shadow: 0px 0px 0px #575871;
-		border: 2px solid #575871;}
-}
+/*@keyframes shadow {*/
+/*	from {box-shadow: 5px 4px 0px #575871;*/
+/*		border: 2px solid transparent;}*/
+/*	50% {box-shadow: 2px 2px 0px #575871;*/
+/*		border: 2px solid rgba(87, 88, 113, 0.61);}*/
+/*	to {box-shadow: 0px 0px 0px #575871;*/
+/*		border: 2px solid #575871;}*/
+/*}*/
 
 .active-letter {
-	background: #003F91;
+	background: white;
 	box-shadow: none;
 }
 
