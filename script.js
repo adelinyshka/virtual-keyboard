@@ -29,9 +29,7 @@ imDiv.appendChild(textarea);
 textarea.classList.add('styled-textarea');
 
 //фокус при загрузке
-document.onload = function() {
-	textarea.focus();
-};
+textarea.focus();
 
 //создана обертка для кнопочек
 let keyboardButtons = document.createElement('div');
@@ -181,6 +179,9 @@ enter.addEventListener('click',function () {
 	textarea.value+= '\n'
 });
 
+
+
+
 //
 // const ruKeyCodes = {
 // 	81: 'й',
@@ -279,7 +280,6 @@ enter.addEventListener('click',function () {
 // 			48, 45, 61, 113, 119, 101, 114, 116, 121, 117, 105, 111, 112,
 // 			91, 93, 97, 115, 100, 102, 103, 104, 106, 107, 108, 59, 39, 92,
 // 			96, 122, 120, 99, 118, 98, 110, 109, 44, 46, 47, 32];
-//
 //
 // 		function init() {
 // 			let out = '';
