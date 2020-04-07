@@ -174,13 +174,10 @@ row1.appendChild(backSpace);
 //сделать чтобы backSpace удалял
 
 backSpace.addEventListener('click', function () {
-	let originalString = textarea.value;
-	let backspasedStirng = '';
 
-	for(let i=0; i < originalString.length-1;i++) {
-		backspasedStirng += originalString[i];
+	if (textarea.value.length > 0) {
+		textarea.value = textarea.value.slice(0, -1);
 	}
-	textarea.value = backspasedStirng;
 });
 
 
@@ -475,11 +472,20 @@ const enKeyCodes = {
 // как
 
 document.onkeypress = function(event) {
+
+	let pushedButton = document.querySelector('.k-key[data-key="'+event.keyCode+'"]');
+
 	document.querySelectorAll('.k-key').forEach(function (element) {
-		// element.classList.remove('active-letter');
-		console.log(document.querySelector('.k-key[data-key="'+event.keyCode+'"]'));
-		console.log(event.keyCode);
-		console.log(element.hasAttribute('data-key="'+event.keyCode+'"'));
+
+		// pushedButton.classList.remove('active-letter');
+		if(pushedButton === element) {
+			pushedButton.classList.toggle('active-letter');
+			// console.log(pushedButton)
+		}
+		// console.log(document.querySelector('.k-key[data-key="'+event.keyCode+'"]'));
+		// console.log(event.keyCode);
+		// console.log(element);
+		// console.log(element.hasAttribute('[data-key="'+event.keyCode+'"]'));
 		// console.log(event);
 		// if(document.querySelector('.k-key[data-key="' +keyboardEngRow1[i] + ' "] ' == event.keyCode) {
 		//
