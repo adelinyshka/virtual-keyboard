@@ -263,43 +263,45 @@ addEventListener('keydown', function (event) {
 	}
 
 	//4 ряд
-	//arrowUp
-	let arrowUp = document.createElement('div');
-	generateButton(arrowUp, 'width:50px;', 'Ctrl', row4);
 
 	//shiftRight
 	let shiftRight = document.createElement('div');
-	generateButton(shiftRight, 'width:150px;', 'Shift', row4);
+	generateButton(shiftRight, 'width:130px;', 'Shift', row4);
+	//arrowUp
+	let arrowUp = document.createElement('div');
+	generateButton(arrowUp, 'margin-left: 52px; width:50px;', '/\\', row4);
+
+
 
 
 	//5 ряд
 
 	//cntr
 	let cntr = document.createElement('div');
-	generateButton(cntr, 'width:70px;', 'Ctrl', row5);
+	generateButton(cntr, 'width:90px;', 'Ctrl', row5);
 
 	//win
 	let win = document.createElement('div');
-	generateButton(win, 'width:70px;', 'Win', row5);
+	generateButton(win, 'width:90px;', 'Win', row5);
 
 	//alt
 	let alt = document.createElement('div');
-	generateButton(alt, 'width:70px;', 'Alt', row5);
+	generateButton(alt, 'width:90px;', 'Alt', row5);
 	//space
 	let space = document.createElement('div');
-	generateButton(space, 'width:460px;', ' ', row5);
+	generateButton(space, 'width:370px;', ' ', row5);
 
 	//alt-right
 	let altRight = document.createElement('div');
-	generateButton(altRight, 'width:70px;', 'Alt', row5);
+	generateButton(altRight, 'width:90px;', 'Alt', row5);
 
 	//cntr
 	let cntrRight = document.createElement('div');
-	generateButton(cntrRight, 'width:70px;', 'Ctrl', row5);
+	generateButton(cntrRight, 'width:90px;', 'Ctrl', row5);
 
 	//arrowRight
 	let arrowRight = document.createElement('div');
-	generateButton(arrowRight, 'width:50px;', '<', row5);
+	generateButton(arrowRight, 'margin-left:32px;width:50px;', '<', row5);
 
 	//arrowDown
 	let arrowDown = document.createElement('div');
@@ -309,20 +311,6 @@ addEventListener('keydown', function (event) {
 	let arrowLeft = document.createElement('div');
 	generateButton(arrowLeft, 'width:50px;', '>', row5);
 
-
-//win
-// 	let win = document.createElement('div');
-// 	win.classList.add('k-key');
-// 	win.style = 'width: 100px;';
-// 	win.innerHTML = 'Win';
-// 	row5.appendChild(win);
-
-	//alt
-//space
-//alt
-//влево
-//вниз
-//вправо
 
 
 // caps.addEventListener('click', function () {
