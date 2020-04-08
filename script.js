@@ -1,5 +1,5 @@
 
-	alert('Здравствуйте! Прошу вас оценить работу в пятницу, 11 апреля, не раньше, пожалуйста. Пока что не успела все сделать. Спасибо')
+	// alert('Здравствуйте! Прошу вас оценить работу в пятницу, 11 апреля, не раньше, пожалуйста. Пока что не успела все сделать. Спасибо')
 
 
 //создать обертку для всего
@@ -52,22 +52,23 @@ const keyboardEngRow4 = [ 122, 120, 99, 118, 98, 110, 109, 44, 46, 47, 32];
 
 
 //созданы ряды для кнопочек
+
+function addRow(x) {
+	x.classList.add('row');
+	keyboardButtons.appendChild(x);
+}
+
 let row1 = document.createElement('div');
-row1.classList.add('row');
-keyboardButtons.appendChild(row1);
-
 let row2 = document.createElement('div');
-row2.classList.add('row');
-keyboardButtons.appendChild(row2);
-
 let row3 = document.createElement('div');
-row3.classList.add('row');
-keyboardButtons.appendChild(row3);
-
 let row4 = document.createElement('div');
-row4.classList.add('row');
-keyboardButtons.appendChild(row4);
+let row5 = document.createElement('div');
 
+	addRow(row1);
+	addRow(row2);
+	addRow(row3);
+	addRow(row4);
+	addRow(row5);
 
 //функция для генерация клавиатуры
 
@@ -104,7 +105,6 @@ function makeCaps(array) {
 	let z=  x.toUpperCase();
 	return z.split('');
 }
-
 
 //добавляем в поле вывода по клику на вирт клаве
 
@@ -168,15 +168,11 @@ function toTextarea() {
 			textarea.value += x.textContent.trim();
 			textarea.focus();
 			}
-
-
 	})
-
 })
 };
 
 toTextarea();
-
 
 
 //сделать чтобы backSpace удалял
@@ -187,8 +183,6 @@ backSpace.addEventListener('click', function () {
 		textarea.focus();
 	}
 });
-
-
 
 
 //подсветка по клику
@@ -206,7 +200,6 @@ document.onkeypress = function(event) {
 		}
 	});
 };
-
 
 // капс
 
@@ -259,10 +252,72 @@ addEventListener('keydown', function (event) {
 });
 
 //создаем 5 ряд кнопок
+	let xxx = document.createElement('div');
 
-//cntr
+//функция для генерации кнопок
+	function generateButton(name, width, textOnButton, row) {
+		name.classList.add('k-key');
+		name.style = width;
+		name.innerHTML = textOnButton ;
+		row.appendChild(name);
+	}
+
+	//4 ряд
+	//arrowUp
+	let arrowUp = document.createElement('div');
+	generateButton(arrowUp, 'width:50px;', 'Ctrl', row4);
+
+	//shiftRight
+	let shiftRight = document.createElement('div');
+	generateButton(shiftRight, 'width:150px;', 'Shift', row4);
+
+
+	//5 ряд
+
+	//cntr
+	let cntr = document.createElement('div');
+	generateButton(cntr, 'width:70px;', 'Ctrl', row5);
+
+	//win
+	let win = document.createElement('div');
+	generateButton(win, 'width:70px;', 'Win', row5);
+
+	//alt
+	let alt = document.createElement('div');
+	generateButton(alt, 'width:70px;', 'Alt', row5);
+	//space
+	let space = document.createElement('div');
+	generateButton(space, 'width:460px;', ' ', row5);
+
+	//alt-right
+	let altRight = document.createElement('div');
+	generateButton(altRight, 'width:70px;', 'Alt', row5);
+
+	//cntr
+	let cntrRight = document.createElement('div');
+	generateButton(cntrRight, 'width:70px;', 'Ctrl', row5);
+
+	//arrowRight
+	let arrowRight = document.createElement('div');
+	generateButton(arrowRight, 'width:50px;', '<', row5);
+
+	//arrowDown
+	let arrowDown = document.createElement('div');
+	generateButton(arrowDown, 'width:50px;', 'v', row5);
+
+	//arrowLeft
+	let arrowLeft = document.createElement('div');
+	generateButton(arrowLeft, 'width:50px;', '>', row5);
+
+
 //win
-//alt
+// 	let win = document.createElement('div');
+// 	win.classList.add('k-key');
+// 	win.style = 'width: 100px;';
+// 	win.innerHTML = 'Win';
+// 	row5.appendChild(win);
+
+	//alt
 //space
 //alt
 //влево
