@@ -26,11 +26,12 @@
 body{
 	background: #0d0e2b;
 	width: 1280px;
+	margin: 0 auto;
 }
 
 .keyboard-wrapper {
 	height: 500px;
-	width: 90%;
+	width: 94%;
 	margin: 50px auto;
 	border: 1px dotted black;
 	display: block;
@@ -47,7 +48,6 @@ body{
 .styled-textarea {
 	width: 92%;
 	height: 150px;
-	margin: 0px 30px;
 	text-align: left;
 	padding: 10px;
 	resize:vertical;
