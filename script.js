@@ -294,26 +294,26 @@ toTextarea();
 
 	//Caps
 	// глючит
-	// let flag = false;
+	let flag = false;
 	//
-	// caps.addEventListener('click', function pressCaps() {
-	// 	if (flag === false) {
-	// 		console.log('We big');
-	// 		createCapsLockKeyboard();
-	// 		caps.classList.add('active-letter');
-	// 		checkActiveButtons.add('caps');
-	// 		flag = true;
-	// 		textarea.focus();
-	// 	}
-	// 	else if (flag === true) {
-	// 		console.log('We small');
-	// 		createKeyboard();
-	// 		caps.classList.remove('active-letter');
-	// 		checkActiveButtons.delete('caps');
-	// 		flag=false;
-	// 		textarea.focus();
-	// 	}
-	// });
+	caps.addEventListener('click', function pressCaps() {
+		if (flag === false) {
+			console.log('We big');
+			createCapsLockKeyboard();
+			caps.classList.add('active-letter');
+			checkActiveButtons.add('caps');
+			flag = true;
+			textarea.focus();
+		}
+		else if (flag === true) {
+			console.log('We small');
+			createKeyboard();
+			caps.classList.remove('active-letter');
+			checkActiveButtons.delete('caps');
+			flag=false;
+			textarea.focus();
+		}
+	});
 
 
 
