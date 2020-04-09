@@ -1,5 +1,5 @@
 
-	alert('Здравствуйте! Прошу вас оценить работу в субботу, 12 апреля, в день Космонавтики, не раньше, пожалуйста. Пока что не успела все сделать. Спасибо')
+	// alert('Здравствуйте! Прошу вас оценить работу в субботу, 12 апреля, в день Космонавтики, не раньше, пожалуйста. Пока что не успела все сделать. Спасибо')
 
 
 //создать обертку для всего
@@ -39,16 +39,138 @@ imDiv.appendChild(keyboardButtons);
 //символы на кнопках
 const keysRow1 = ['`','1','2','3','4','5','6','7','8','9','0','-','=',];
 //символы для data-key
-const keyboardEngRow1 = [96, 49, 50, 51, 52, 53, 54, 55, 56, 57, 48, 45, 61, ];
+const keyCodes1 = [96, 49, 50, 51, 52, 53, 54, 55, 56, 57, 48, 45, 61, ];
 
 const keysRow2 = ['q','w','e','r','t','y','u','i','o','p','[',']',];
-const keyboardEngRow2 = [113, 119, 101, 114, 116, 121, 117, 105, 111, 112, 91, 93, ];
+const keyCodes2 = [113, 119, 101, 114, 116, 121, 117, 105, 111, 112, 91, 93, ];
 
-const keysRow3 = ['a','s','d','f','g','h','j','k','l',';','""',' \\ ',];
-const keyboardEngRow3 = [97, 115, 100, 102, 103, 104, 106, 107, 108, 59, 39, 92, ];
+const keysRow3 = ['a','s','d','f','g','h','j','k','l',';','\'',' \\ ',];
+const keyCodes3 = [97, 115, 100, 102, 103, 104, 106, 107, 108, 59, 39, 92, ];
 
 const keysRow4 = ['z','x','c','v','b','n','m', ',' , '.' , '/'];
-const keyboardEngRow4 = [ 122, 120, 99, 118, 98, 110, 109, 44, 46, 47, 32];
+const keyCodes4 = [ 122, 120, 99, 118, 98, 110, 109, 44, 46, 47, 32];
+
+const keyboardBig2 = ['Q','W','E','R','T','Y','U','I','O','P','[',']',];
+const keyboardBig3 = ['A','S','D','F','G','H','J','K','L',';','\'','\\',];
+const keyboardBig4 = ['Z','X','C','V','B','N','M',',','.','/',];
+
+let cntr = document.createElement('div');
+	//win
+let win = document.createElement('div');
+	//alt
+let alt = document.createElement('div');
+	//space
+	let space = document.createElement('div');
+	//alt-right
+	let altRight = document.createElement('div');
+	//cntr
+	let cntrRight = document.createElement('div');
+	//arrowRight
+	let arrowRight = document.createElement('div');
+	//arrowDown
+	let arrowDown = document.createElement('div');
+	//arrowLeft
+	let arrowLeft = document.createElement('div');
+
+//генерация обычной клавиатуры
+	function createKeyboard() {
+		// 1 row
+		let out1 = '';
+		for(let i=0; i< keysRow1.length; i++) {
+			out1 +=  '<div class = "k-key" data-key="' + keyCodes1[i] + '"' +'>' + keysRow1[i] + ' </div>';
+		}
+		row1.innerHTML = out1;
+		row1.append(backSpace);
+
+		//2 row
+		let out2 = '';
+		for(let i=0; i< keysRow2.length; i++) {
+			out2 +=  '<div class = "k-key" data-key="' + keyCodes2[i] + '"' +'>' + keysRow2[i] + ' </div>';
+		}
+		row2.innerHTML = out2;
+		row2.prepend(tab);
+
+		//3 row
+		let out3 = '';
+		for(let i=0; i< keysRow3.length; i++) {
+			out3 +=  '<div class = "k-key" data-key="' + keyCodes3[i] + '"' +'>' + keysRow3[i] + ' </div>';
+		}
+		row3.innerHTML = out3;
+		row3.prepend(caps);
+		row3.append(enter);
+
+		//4 row
+		let out4 = '';
+		for(let i=0; i< keysRow4.length; i++) {
+			out4 +=  '<div class = "k-key" data-key="' + keyCodes4[i] + '"' +'>' + keysRow4[i] + ' </div>';
+		}
+		row4.innerHTML = out4;
+		row4.prepend(shift);
+		row4.append(shiftRight);
+		row4.append(arrowUp);
+
+		generateFifthRow();
+
+	}
+
+//генерация клавиатуры с большими буквами
+function createCapsLockKeyboard() {
+	// 1 row
+	let out1 = '';
+	for(let i=0; i< keysRow1.length; i++) {
+		out1 +=  '<div class = "k-key" data-key="' + keyCodes1[i] + '"' +'>' + keysRow1[i] + ' </div>';
+	}
+	row1.innerHTML = out1;
+	row1.append(backSpace);
+
+	//2 row
+	let out2 = '';
+	for(let i=0; i< keyboardBig2.length; i++) {
+		out2 +=  '<div class = "k-key" data-key="' + keyCodes2[i] + '"' +'>' + keyboardBig2[i] + ' </div>';
+	}
+	row2.innerHTML = out2;
+	row2.prepend(tab);
+
+	//3 row
+	let out3 = '';
+	for(let i=0; i< keyboardBig3.length; i++) {
+		out3 +=  '<div class = "k-key" data-key="' + keyCodes3[i] + '"' +'>' + keyboardBig3[i] + ' </div>';
+	}
+	row3.innerHTML = out3;
+	row3.prepend(caps);
+	row3.append(enter);
+
+	//4 row
+	let out4 = '';
+	for(let i=0; i< keyboardBig4.length; i++) {
+		out4 +=  '<div class = "k-key" data-key="' + keyCodes4[i] + '"' +'>' + keyboardBig4[i] + ' </div>';
+	}
+	row4.innerHTML = out4;
+	row4.prepend(shift);
+	row4.append(shiftRight);
+	row4.append(arrowUp);
+
+	generateFifthRow();
+
+}
+
+
+
+	function initBig(buttonArr, keyCode, rowToInsert, additionButton) {
+		if(additionButton === undefined) {
+			let out = '';
+			for(let i=0; i< buttonArr.length; i++) {
+				out +=  '<div class = "k-key" data-key="' + keyCode[i] + '"' +'>' + buttonArr[i] + ' </div>'
+			}
+			rowToInsert.innerHTML = out;
+		} else {
+			let out = '';
+			for(let i=0; i<buttonArr.length; i++) {
+				out += '<div class = "k-key" data-key="' + keyCode[i] + '"' +'>' + buttonArr[i] + ' </div>'
+			}
+			rowToInsert.innerHTML = additionButton + out;
+		}
+	}
 
 
 //созданы ряды для кнопочек
@@ -90,32 +212,25 @@ function init(buttonArr, keyCode, rowToInsert, additionButton) {
 
 // генерация кнопок
 
-init(keysRow1,keyboardEngRow1,row1);
+init(keysRow1,keyCodes1,row1);
 
-init(keysRow2,keyboardEngRow2,row2, '<div class = "k-key" style="width: 150px;" data-key="9">Tab</div>');
+init(keysRow2,keyCodes2,row2, '<div class = "k-key" style="width: 150px;" data-key="9">Tab</div>');
 
-init(keysRow3,keyboardEngRow3,row3, '<div class = "k-key" style="width: 150px;" data-key="20">Caps Lock</div>');
+init(keysRow3,keyCodes3,row3, '<div class = "k-key" style="width: 150px;" data-key="20">Caps Lock</div>');
 
-init(keysRow4,keyboardEngRow4,row4, '<div class = "k-key" style="width: 150px;" data-key="16">Shift</div>');
+init(keysRow4,keyCodes4,row4, '<div class = "k-key" style="width: 150px;" data-key="16">Shift</div>');
 
 
-// функция для генерации больших букв
-function makeCaps(array) {
-	let x = array.join('');
-	let z=  x.toUpperCase();
-	return z.split('');
-}
 
 //добавляем в поле вывода по клику на вирт клаве
 
 //определили где кнопки
 //любая кнопка
 let imKey = document.querySelectorAll('.k-key');
-
+//таб
 let tab = document.querySelector('div[data-key="9"]');
-
+//капс
 let caps = document.querySelector('div[data-key="20"]');
-
 
 
 // добавить backSpace
@@ -131,38 +246,26 @@ enter.classList.add('k-key');
 enter.style = 'width: 150px;'
 enter.innerHTML = 'Enter';
 row3.appendChild(enter);
-
-
 enter.addEventListener('click',function () {
 	textarea.value+= '\n'
 });
 
-// функция для вывода значений по клику в поле
+
+
+// функция для вывода значений по клику на кнопки со значениями
 function toTextarea() {
 	imKey.forEach(function (x) {
-
 		x.addEventListener('click', function () {
-
 			//проверка на таб
 			if(x === tab){
 				textarea.value += '\t';
-				textarea.focus();
 				tab.classList.add('.active-letter');
-				function removeActive() {
-					tab.classList.remove('active-letter');
-					textarea.focus();
-				}
-				setTimeout(removeActive,  300);
 				textarea.focus();
-
 				//проверка на капс
-			} else if (x === caps) {
-				caps.classList.toggle('active-letter');
-
+			}  if ( x === caps) {
 				textarea.value = textarea.value;
 				textarea.focus();
 			}
-
 			else
 			{
 			textarea.value += x.textContent.trim();
@@ -173,6 +276,39 @@ function toTextarea() {
 };
 
 toTextarea();
+
+	let flag = false;
+
+	// функция для генерации больших букв
+	// function makeCaps(array) {
+	// 	let x = array.join('');
+	// 	let z =  x.toUpperCase();
+	// 	 let m = z.split('');
+	// 	 return m;
+	// }
+
+
+
+caps.addEventListener('click', function pressCaps() {
+	if (flag === false) {
+		console.log('We big');
+
+		createCapsLockKeyboard();
+		caps.classList.add('active-letter');
+		flag = true;
+		textarea.focus();
+	}
+	else if (flag === true) {
+		console.log('We small');
+		createKeyboard();
+		caps.classList.remove('active-letter');
+		flag=false;
+		textarea.focus();
+	}
+});
+
+
+// функция для вывода значений по клику на кнопки БЕЗ значений
 
 
 //сделать чтобы backSpace удалял
@@ -204,30 +340,27 @@ document.onkeypress = function(event) {
 // капс
 
 //генерация кнопок с большими буквами
-let bigLettersRow2 = makeCaps(keysRow2);
-let bigLettersRow3 = makeCaps(keysRow3);
-let bigLettersRow4 = makeCaps(keysRow4);
+// let bigLettersRow2, bigLettersRow3, bigLettersRow4;
 
+// let bigLettersRow2 = makeCaps(keysRow2);
+// let bigLettersRow3 = makeCaps(keysRow3);
+// let bigLettersRow4 = makeCaps(keysRow4);
 
-function beBig() {
-	init(keysRow1,keyboardEngRow1,row1);
-
-	init(bigLettersRow2,keyboardEngRow2,row2, '<div class = "k-key" style="width: 150px;" data-key="9">Tab</div>');
-
-	init(bigLettersRow3,keyboardEngRow3,row3, '<div class = "k-key active-letter " style="width: 150px;" data-key="20">Caps Lock</div>');
-	bigLettersRow3.appendChild(enter);
-
-	init(bigLettersRow4,keyboardEngRow4,row4, '<div class = "k-key" style="width: 150px;" data-key="16">Shift</div>');
-}
+// function beBig() {
+// 	init(keysRow1,keyCodes1,row1);
+// 	init(bigLettersRow2,keyCodes2,row2, '<div class = "k-key" style="width: 150px;" data-key="9">Tab</div>');
+// 	init(bigLettersRow3,keyCodes3,row3, '<div class = "k-key" style="width: 150px;" data-key="20">Caps Lock</div>');
+// 	init(bigLettersRow4,keyCodes4,row4, '<div class = "k-key" style="width: 150px;" data-key="16">Shift</div>');
+//
+//
+// }
+// console.log(beBig);
 
 function beSmall() {
-	init(keysRow1,keyboardEngRow1,row1);
-
-	init(keysRow2,keyboardEngRow2,row2, '<div class = "k-key" style="width: 150px;" data-key="9">Tab</div>');
-
-	init(keysRow3,keyboardEngRow3,row3, '<div class = "k-key" style="width: 150px;" data-key="20">Caps Lock</div>');
-
-	init(keysRow4,keyboardEngRow4,row4, '<div class = "k-key" style="width: 150px;" data-key="16">Shift</div>');
+	init(keysRow1,keyCodes1,row1);
+	init(keysRow2,keyCodes2,row2, '<div class = "k-key" style="width: 150px;" data-key="9">Tab</div>');
+	init(keysRow3,keyCodes3,row3, '<div class = "k-key" style="width: 150px;" data-key="20">Caps Lock</div>');
+	init(keysRow4,keyCodes4,row4, '<div class = "k-key" style="width: 150px;" data-key="16">Shift</div>');
 }
 
 let shift = document.querySelector('[data-key="16"]');
@@ -261,7 +394,6 @@ addEventListener('keydown', function (event) {
 		name.innerHTML = textOnButton ;
 		row.appendChild(name);
 	}
-
 	//4 ряд
 
 	//shiftRight
@@ -272,55 +404,40 @@ addEventListener('keydown', function (event) {
 	generateButton(arrowUp, 'margin-left: 52px; width:50px;', '/\\', row4);
 
 
-
-
 	//5 ряд
 
-	//cntr
-	let cntr = document.createElement('div');
-	generateButton(cntr, 'width:90px;', 'Ctrl', row5);
-
-	//win
-	let win = document.createElement('div');
-	generateButton(win, 'width:90px;', 'Win', row5);
-
-	//alt
-	let alt = document.createElement('div');
-	generateButton(alt, 'width:90px;', 'Alt', row5);
-	//space
-	let space = document.createElement('div');
-	generateButton(space, 'width:370px;', ' ', row5);
-
-	//alt-right
-	let altRight = document.createElement('div');
-	generateButton(altRight, 'width:90px;', 'Alt', row5);
-
-	//cntr
-	let cntrRight = document.createElement('div');
-	generateButton(cntrRight, 'width:90px;', 'Ctrl', row5);
-
-	//arrowRight
-	let arrowRight = document.createElement('div');
-	generateButton(arrowRight, 'margin-left:32px;width:50px;', '<', row5);
-
-	//arrowDown
-	let arrowDown = document.createElement('div');
-	generateButton(arrowDown, 'width:50px;', 'v', row5);
-
-	//arrowLeft
-	let arrowLeft = document.createElement('div');
-	generateButton(arrowLeft, 'width:50px;', '>', row5);
 
 
+	function generateFifthRow() {
+		generateButton(cntr, 'width:90px;', 'Ctrl', row5);
+		generateButton(win, 'width:90px;', 'Win', row5);
+		generateButton(alt, 'width:90px;', 'Alt', row5);
+		generateButton(space, 'width:370px;', ' ', row5);
+		generateButton(altRight, 'width:90px;', 'Alt', row5);
+		generateButton(cntrRight, 'width:90px;', 'Ctrl', row5);
+		generateButton(arrowRight, 'margin-left:32px;width:50px;', '<', row5);
+		generateButton(arrowDown, 'width:50px;', 'v', row5);
+		generateButton(arrowLeft, 'width:50px;', '>', row5);
+	}
+
+	generateFifthRow();
+
+
+
+	// function removeActive() {
+	// 	tab.classList.remove('active-letter');
+	// 	textarea.focus();
+	// }
+	// setTimeout(removeActive,  300);
 
 // caps.addEventListener('click', function () {
-// 	init(keysRow1,keyboardEngRow1,row1);
+// 	init(keysRow1,keyCodes1,row1);
 //
-// 	init(bigLettersRow2,keyboardEngRow2,row2, '<div class = "k-key" style="width: 150px;" data-key="9">Tab</div>');
+// 	init(bigLettersRow2,keyCodes2,row2, '<div class = "k-key" style="width: 150px;" data-key="9">Tab</div>');
 //
-// 	init(bigLettersRow3,keyboardEngRow3,row3, '<div class = "k-key" style="width: 150px;" data-key="20">Caps Lock</div>');
+// 	init(bigLettersRow3,keyCodes3,row3, '<div class = "k-key" style="width: 150px;" data-key="20">Caps Lock</div>');
 //
-// 	init(bigLettersRow4,keyboardEngRow4,row4, '<div class = "k-key" style="width: 150px;" data-key="16">Shift</div>');
+// 	init(bigLettersRow4,keyCodes4,row4, '<div class = "k-key" style="width: 150px;" data-key="16">Shift</div>');
 //
 // });
 

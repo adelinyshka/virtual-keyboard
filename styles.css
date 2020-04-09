@@ -24,7 +24,7 @@
 }
 
 body{
-	background: #c1c1c1;
+	background: #333333;
 	width: 1280px;
 	margin: 0 auto;
 }
@@ -53,7 +53,7 @@ body{
 	outline:none;
 	display: block;
 	color: #15552e;
-	background: #c2c2c2;
+	background: #ffffff;
 	border-width: 3px;
 	border-radius: 6px;
 	font-size: 24px;
