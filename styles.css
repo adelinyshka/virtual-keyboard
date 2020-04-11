@@ -99,12 +99,7 @@ a.small-info {
 	justify-content: center;
 }
 
-.key:active {
-	background: #fae097;
-	box-shadow: inset 3px 9px 10px #989970, 2px 1px 0px #465f4e;
-	border: 1px solid #000000;
-	color: black;
-}
+
 
 .special_key {
 	width: 30%;
@@ -112,7 +107,6 @@ a.small-info {
 	font-family: sans-serif;
 	font-size: 20px;
 	font-weight: 500;
-
 	text-align: center;
 	user-select: none;
 	height: 50px;
@@ -138,34 +132,26 @@ a.small-info {
 	box-shadow: inset 3px 9px 10px #989970, 2px 1px 0px #465f4e;
 	border: 1px solid #000000;
 	color: black;
-	animation: shadow 0.2s alternate;
+	/*animation: shadow 0.2s alternate;*/
 }
 
-@keyframes shadow {
-	from {box-shadow: 5px 4px 0px #0f351b, inset -6px -5px 10px #102d1b, inset 6px 5px 10px #6b7774;;
-		border: 2px solid #3e4e44;}
-	50% {box-shadow: 2px 2px 0px #575871;
-		border: 2px solid #225E3C;}
-	to {box-shadow: inset 3px 9px 10px #8aaf99,
-	2px 1px 0px #0f351b;;
-		border: 2px solid #697f71;}
-}
 
 .active_key {
 	background: #fae097;
-	box-shadow: inset 3px 9px 10px #989970, 2px 1px 0px #465f4e;
+	box-shadow: inset 3px 9px 10px #989970, 2px 1px 0px #465f4e,
+	5px 4px 0px transparent, inset -6px -5px 10px transparent;
 	border: 1px solid #000000;
 	color: black;
 	animation: shadow 0.2s alternate;
 }
 @keyframes shadow {
 	from {box-shadow: 5px 4px 0px #0f351b, inset -6px -5px 10px #102d1b, inset 6px 5px 10px #6b7774;;
-		border: 2px solid #3e4e44;}
+		border: 1px solid #3e4e44;}
 	50% {box-shadow: 2px 2px 0px #575871;
-		border: 2px solid #225E3C;}
+		border: 1px solid #225E3C;}
 	to {box-shadow: inset 3px 9px 10px #8aaf99,
 	2px 1px 0px #0f351b;;
-		border: 2px solid #697f71;}
+		border: 1px solid #697f71;}
 }
 
 .text_message {
