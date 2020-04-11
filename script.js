@@ -1,561 +1,854 @@
+class Keyboard {
 
-	alert('Здравствуйте! Прошу вас оценить работу в воскресенье, 12 апреля, не раньше, пожалуйста. Пока что не успела все сделать. Спасибо')
+	constructor() {
+		this.shift = false;
+		this.caps = false;
+		this.ctrl = false;
+
+		this.language = localStorage.getItem("language");
+
+		this.keyFunctional = {};
+		this.letterRu = {};
+		this.keyNumRu = {};
+		this.letterEng = {};
+		this.keyNumEng = {};
+		this.keyEl = {};
+	}
+
+//create keyboard
+	keyboard() {
+
+// wrapper
+		this.wrapper = document.createElement('div');
+		this.wrapper.classList.add('wrapper');
+		document.body.prepend(this.wrapper);
+
+//title
+		this.title = 	document.createElement('h5');
+		this.title.classList.add('title');
+		this.title.innerText = 'Приветствую! Сделано и в MacOS и в Windows, тк' +
+			' делала и дома, и на работе! Переключается язык ctrl слева + alt' +
+			' слева.';
+		document.body.prepend(this.title);
+
+		// .
+//small info
+		this.info = 	document.createElement('p');
+		this.info.classList.add('small-info');
+		this.info.innerText = 'Если что пиши в discord/telegram - adel' +
+			' dubinnikova. Спасибо, что проверяете';
+		document.body.append(this.info);
+
+//textarea
+		this.textarea = document.createElement('textarea');
+		this.textarea.classList.add('textarea');
+		this.wrapper.prepend(this.textarea);
+		this.textarea.setAttribute('autofocus', '');
+		this.textarea.setAttribute('value', '');
+
+//kb wrapper
+		this.keyboardWrapper = document.createElement('div');
+		this.keyboardWrapper.classList.add('keyboard-wrapper');
+		this.keyboardWrapper.setAttribute('data', 'wrap');
+		this.textarea.after(this.keyboardWrapper);
+
+//row1
+		this.row1 = document.createElement('div');
+		this.row1.classList.add('keyboard_line');
+		this.row1.setAttribute('data', 'line');
+		this.keyboardWrapper.prepend(this.row1);
+
+//row2
+		this.row2 = document.createElement('div');
+		this.row2.classList.add('keyboard_line');
+		this.row2.setAttribute('data', 'line');
+		this.keyboardWrapper.append(this.row2);
+
+//row3
+		this.row3 = document.createElement('div');
+		this.row3.classList.add('keyboard_line');
+		this.row3.setAttribute('data', 'line');
+		this.keyboardWrapper.append(this.row3);
+
+//row4
+		this.row4 = document.createElement('div');
+		this.row4.classList.add('keyboard_line');
+		this.row4.setAttribute('data', 'line');
+		this.keyboardWrapper.append(this.row4);
+
+//row5
+		this.row5 = document.createElement('div');
+		this.row5.classList.add('keyboard_line');
+		this.row5.setAttribute('data', 'line');
+		this.keyboardWrapper.append(this.row5);
+	}
 
 
-//создать обертку для всего
-let imDiv = document.createElement('div');
-
-//добавить стилизацию
-imDiv.classList.add('keyboard-wrapper');
-
-//прикрепить на страницу
-document.body.appendChild(imDiv);
-
-//создать заголовок с инфо о том что создается в системе MacOS
-let title = document.createElement('h1');
-
-//добавить заголовок на стр
-imDiv.appendChild(title);
-
-//добавить заголовку текст
-title.innerText = 'Приветствую! Создано в MacOS!';
-
-//добавить заголовку стили
-title.classList.add('title');
-
-//создать и добавить поле для вывода символов
-let textarea = document.createElement('textarea');
-imDiv.appendChild(textarea);
-textarea.classList.add('styled-textarea');
-
-//фокус при загрузке
-textarea.focus();
-
-//создана обертка для кнопочек
-let keyboardButtons = document.createElement('div');
-keyboardButtons.classList.add('wrapper-buttons');
-imDiv.appendChild(keyboardButtons);
-
-//символы на кнопках
-const keysRow1 = ['`','1','2','3','4','5','6','7','8','9','0','-','=',];
-//символы для data-key
-const keyCodes1 = [96, 49, 50, 51, 52, 53, 54, 55, 56, 57, 48, 45, 61, ];
-
-const keysRow2 = ['q','w','e','r','t','y','u','i','o','p','[',']',];
-const keyCodes2 = [113, 119, 101, 114, 116, 121, 117, 105, 111, 112, 91, 93, ];
-
-const keysRow3 = ['a','s','d','f','g','h','j','k','l',';','\'',' \\ ',];
-const keyCodes3 = [97, 115, 100, 102, 103, 104, 106, 107, 108, 59, 39, 92, ];
-
-const keysRow4 = ['z','x','c','v','b','n','m', ',' , '.' , '/'];
-const keyCodes4 = [ 122, 120, 99, 118, 98, 110, 109, 44, 46, 47, 32];
-
-const keyboardBig2 = ['Q','W','E','R','T','Y','U','I','O','P','[',']',];
-const keyboardBig3 = ['A','S','D','F','G','H','J','K','L',';','\'','\\',];
-const keyboardBig4 = ['Z','X','C','V','B','N','M',',','.','/',];
-
-let cntr = document.createElement('div');
-	//win
-let win = document.createElement('div');
-	//alt
-let alt = document.createElement('div');
-	//space
-	let space = document.createElement('div');
-	//alt-right
-	let altRight = document.createElement('div');
-	//cntr
-	let cntrRight = document.createElement('div');
-	//arrowRight
-	let arrowRight = document.createElement('div');
-	//arrowDown
-	let arrowDown = document.createElement('div');
-	//arrowLeft
-	let arrowLeft = document.createElement('div');
+//keys
+	kbButtons() {
+		keyWhich.forEach(function (item, index) {
+			let key = document.createElement('div');
+			key.setAttribute('data', item);
+			key.setAttribute('data-code', keyCodes[index]);
+			this.keyEl[keyCodes[index]] = key;
+			if (index >= 0 && index <= 13) {
+				if (item === 8) {
+					key.classList.add('special_key');
+				} else {
+					key.classList.add('key');
+				}
+				this.row1.append(key);
+			} else if (index >= 14 && index <= 28) {
+				if (item === 9 || item === 46) {
+					key.classList.add('special_key');
+				} else {
+					key.classList.add('key');
+				}
+				this.row2.append(key);
+			} else if (index >= 29 && index <= 41) {
+				if (item === 20 || item === 13) {
+					key.classList.add('special_key');
+				} else {
+					key.classList.add('key');
+				}
+				this.row3.append(key);
+			} else if (index >= 42 && index <= 54) {
+				if (item === 16 || item === 38) {
+					key.classList.add('special_key');
+				} else {
+					key.classList.add('key');
+				}
+				this.row4.append(key);
+			} else if (index >= 55 && index <= 63) {
+				if (item === 17 || item === 91 || item === 18 || item === 32 || item === 37 || item === 40 || item === 39) {
+					key.classList.add('special_key');
+				} else {
+					key.classList.add('key');
+				}
+				this.row5.append(key);
+			}
+		}, this);
+	}
 
 
-	let checkActiveButtons =  new Set();
+	keyObjectClassification() {
+		for (let key in this.keyEl) {
+			keyCodeLetterEng.forEach(function (item) {
+				if (key === item) {
+					this.letterEng[key] = this.keyEl[key];
+				}
+			}, this);
+			keyCodeNumEng.forEach(function (item) {
+				if (key === item) {
+					this.keyNumEng[key] = this.keyEl[key];
+				}
+			}, this);
+			keyCodeLetterRu.forEach(function (item) {
+				if (key === item) {
+					this.letterRu[key] = this.keyEl[key];
+				}
+			}, this);
+			keyCodeNumRu.forEach(function (item) {
+				if (key === item) {
+					this.keyNumRu[key] = this.keyEl[key];
+				}
 
-//генерация обычной клавиатуры
-	function createKeyboard() {
-		// 1 row
-		let out1 = '';
-		for(let i=0; i< keysRow1.length; i++) {
-			out1 +=  '<div class = "k-key item" data-key="' + keyCodes1[i] + '"' +'>' + keysRow1[i] + ' </div>';
+			}, this);
+			keyCodeFunct.forEach(function (item) {
+				if (key === item) {
+					this.keyFunctional[key] = this.keyEl[key];
+				}
+			}, this);
 		}
-		row1.innerHTML = out1;
-		row1.append(backSpace);
-
-		//2 row
-		let out2 = '';
-		for(let i=0; i< keysRow2.length; i++) {
-			out2 +=  '<div class = "k-key item" data-key="' + keyCodes2[i] + '"' +'>' + keysRow2[i] + ' </div>';
-		}
-		row2.innerHTML = out2;
-		row2.prepend(tab);
-
-		//3 row
-		let out3 = '';
-		for(let i=0; i< keysRow3.length; i++) {
-			out3 +=  '<div class = "k-key item" data-key="' + keyCodes3[i] + '"' +'>' + keysRow3[i] + ' </div>';
-		}
-		row3.innerHTML = out3;
-		row3.prepend(caps);
-		row3.append(enter);
-
-		//4 row
-		let out4 = '';
-		for(let i=0; i< keysRow4.length; i++) {
-			out4 +=  '<div class = "k-key item" data-key="' + keyCodes4[i] + '"' +'>' + keysRow4[i] + ' </div>';
-		}
-		row4.innerHTML = out4;
-		row4.prepend(shift);
-		row4.append(shiftRight);
-		row4.append(arrowUp);
-
-		generateFifthRow();
 
 	}
 
-//генерация клавиатуры с большими буквами
-function createCapsLockKeyboard() {
-	// 1 row
-	let out1 = '';
-	for(let i=0; i< keysRow1.length; i++) {
-		out1 +=  '<div class = "k-key item" data-key="' + keyCodes1[i] + '"' +'>' + keysRow1[i] + ' </div>';
-	}
-	row1.innerHTML = out1;
-	row1.append(backSpace);
-
-	//2 row
-	let out2 = '';
-	for(let i=0; i< keyboardBig2.length; i++) {
-		out2 +=  '<div class = "k-key item" data-key="' + keyCodes2[i] + '"' +'>' + keyboardBig2[i] + ' </div>';
-	}
-	row2.innerHTML = out2;
-	row2.prepend(tab);
-
-	//3 row
-	let out3 = '';
-	for(let i=0; i< keyboardBig3.length; i++) {
-		out3 +=  '<div class = "k-key item" data-key="' + keyCodes3[i] + '"' +'>' + keyboardBig3[i] + ' </div>';
-	}
-	row3.innerHTML = out3;
-	row3.prepend(caps);
-	row3.append(enter);
-
-	//4 row
-	let out4 = '';
-	for(let i=0; i< keyboardBig4.length; i++) {
-		out4 +=  '<div class = "k-key item" data-key="' + keyCodes4[i] + '"' +'>' + keyboardBig4[i] + ' </div>';
-	}
-	row4.innerHTML = out4;
-	row4.prepend(shift);
-	row4.append(shiftRight);
-	row4.append(arrowUp);
-
-	generateFifthRow();
-
-}
-
-
-
-	// function initBig(buttonArr, keyCode, rowToInsert, additionButton) {
-	// 	if(additionButton === undefined) {
-	// 		let out = '';
-	// 		for(let i=0; i< buttonArr.length; i++) {
-	// 			out +=  '<div class = "k-key" data-key="' + keyCode[i] + '"' +'>' + buttonArr[i] + ' </div>'
-	// 		}
-	// 		rowToInsert.innerHTML = out;
-	// 	} else {
-	// 		let out = '';
-	// 		for(let i=0; i<buttonArr.length; i++) {
-	// 			out += '<div class = "k-key" data-key="' + keyCode[i] + '"' +'>' + buttonArr[i] + ' </div>'
-	// 		}
-	// 		rowToInsert.innerHTML = additionButton + out;
-	// 	}
-	// }
-
-
-//созданы ряды для кнопочек
-
-function addRow(x) {
-	x.classList.add('row');
-	keyboardButtons.appendChild(x);
-}
-
-let row1 = document.createElement('div');
-let row2 = document.createElement('div');
-let row3 = document.createElement('div');
-let row4 = document.createElement('div');
-let row5 = document.createElement('div');
-
-	addRow(row1);
-	addRow(row2);
-	addRow(row3);
-	addRow(row4);
-	addRow(row5);
-
-//функция для генерация клавиатуры
-
-function init(buttonArr, keyCode, rowToInsert, additionButton) {
-	if(additionButton === undefined) {
-		let out = '';
-		for(let i=0; i< buttonArr.length; i++) {
-			out +=  '<div class = "k-key item" data-key="' + keyCode[i] + '"' +'>' + buttonArr[i] + ' </div>'
+//check language
+	LangCaseKb() {
+		if (this.language === null) {
+			localStorage.setItem('language', 'en');
+			this.language = localStorage.getItem('language');
 		}
-		rowToInsert.innerHTML = out;
-	} else {
-		let out = '';
-		for(let i=0; i<buttonArr.length; i++) {
-			out += '<div class = "k-key item" data-key="' + keyCode[i] + '"' +'>' + buttonArr[i] + ' </div>'
+		switch (this.language) {
+			case "en":
+				switch (this.caps) {
+					case true:
+						for (let key in lettersEnglishCaps) {
+							this.letterEng[key].innerHTML = lettersEnglishCaps[key];
+						}
+						keyCodeFunct.forEach(function (item, index) {
+							this.keyFunctional[item].innerHTML = keysFunction[index];
+						}, this);
+						break;
+					case false:
+						switch (this.shift) {
+							case true:
+								for (let key in lettersEnglishCaps) {
+									this.letterEng[key].innerHTML = lettersEnglishCaps[key];
+								}
+								for (let key in keyCodeSymbolShift) {
+									this.keyNumEng[key].innerHTML = keyCodeSymbolShift[key];
+								}
+								keyCodeFunct.forEach(function (item, index) {
+									this.keyFunctional[item].innerHTML = keysFunction[index];
+								}, this);
+								break;
+							case false:
+								for (let key in lettersEnglish) {
+									this.letterEng[key].innerHTML = lettersEnglish[key];
+								}
+								for (let key in keyCodeSymbol) {
+									this.keyNumEng[key].innerHTML = keyCodeSymbol[key];
+								}
+								keyCodeFunct.forEach(function (item, index) {
+									this.keyFunctional[item].innerHTML = keysFunction[index];
+								}, this);
+								break;
+						}
+				}
+				break;
+
+			case "ru":
+				switch (this.caps) {
+					case true:
+						for (let key in lettersRussianCaps) {
+							this.letterRu[key].innerHTML = lettersRussianCaps[key];
+						}
+						keyCodeFunct.forEach(function (item, index) {
+							this.keyFunctional[item].innerHTML = keysFunction[index];
+						}, this);
+						break;
+					case false:
+						switch (this.shift) {
+							case true:
+								for (let key in lettersRussianCaps) {
+									this.letterRu[key].innerHTML = lettersRussianCaps[key];
+								}
+								for (let key in keyCodeSymbolShiftRu) {
+									this.keyNumRu[key].innerHTML = keyCodeSymbolShiftRu[key];
+								}
+								keyCodeFunct.forEach(function (item, index) {
+									this.keyFunctional[item].innerHTML = keysFunction[index];
+								}, this);
+								break;
+							case false:
+								for (let key in lettersRussian) {
+									this.letterRu[key].innerHTML = lettersRussian[key];
+								}
+								for (let key in keyCodeSymbolRu) {
+									this.keyNumRu[key].innerHTML = keyCodeSymbolRu[key];
+								}
+								keyCodeFunct.forEach(function (item, index) {
+									this.keyFunctional[item].innerHTML = keysFunction[index];
+								}, this);
+								break;
+						}
+				}
+				break;
 		}
-		rowToInsert.innerHTML = additionButton + out;
 	}
-};
-
-// генерация кнопок
-
-init(keysRow1,keyCodes1,row1);
-
-init(keysRow2,keyCodes2,row2, '<div class = "k-key item" style="width: 150px;" data-key="9">Tab</div>');
-
-init(keysRow3,keyCodes3,row3, '<div class = "k-key" style="width: 150px;" data-key="20">Caps Lock</div>');
-
-init(keysRow4,keyCodes4,row4, '<div class = "k-key" style="width: 150px;" data-key="16">Shift</div>');
 
 
+//switch lang
+	switchLang(event) {
+		let checker;
+		if (event.type === 'click') {
+			checker = event.target.getAttribute('data-code');
+		} else {
+			checker = event.code;
+		}
+		if (checker === 'ControlLeft' || checker === 'ControlRight') {
+			this.ctrl = true;
+		}
+		if ((checker === 'AltLeft' || checker === 'AltRight') && this.ctrl) {
+			if (localStorage.getItem('language') === 'en') {
+				this.ctrl = false;
+				localStorage.setItem('language', 'ru');
+				this.language = localStorage.getItem('language');
+				this.LangCaseKb();
 
-//добавляем в поле вывода по клику на вирт клаве
+			} else {
+				this.ctrl = false;
+				localStorage.setItem('language', 'en');
+				this.language = localStorage.getItem('language');
+				this.LangCaseKb();
+			}
+		}
+	}
 
-//определили где кнопки
-//любая кнопка
-let imKey = document.querySelectorAll('.item');
-//таб
-let tab = document.querySelector('div[data-key="9"]');
-//капс
-let caps = document.querySelector('div[data-key="20"]');
 
 
-// добавить backSpace
-let backSpace = document.createElement('div');
-backSpace.classList.add('k-key');
-backSpace.style = 'width: 150px;'
-backSpace.innerHTML = 'BackSpace';
-row1.appendChild(backSpace);
+
+//textarea
+	printText(event) {
+		event.preventDefault();
+		let checker2;
+		if (event.type === 'click') {
+			checker2 = event.target.getAttribute('data-code');
+		} else {
+			checker2 = event.code;
+		}
+
+		this.caretPos = this.textarea.selectionStart;
+		this.caretPosEnd = this.textarea.selectionEnd;
+
+		if (!this.keyFunctional[checker2]) {
+			switch (this.language) {
+				case 'en':
+					switch (this.caps) {
+						case true:
+							if (!(checker2 in keyCodeSymbol)) {
+								this.moveCursor(lettersEnglishCaps[checker2]);
+							} else {
+								this.moveCursor(keyCodeSymbol[checker2]);
+							}
+							break;
+						case false:
+							switch (this.shift) {
+								case true:
+									if (!(checker2 in keyCodeSymbolShift)) {
+										this.moveCursor(lettersEnglishCaps[checker2]);
+									} else {
+										this.moveCursor(keyCodeSymbolShift[checker2]);
+									}
+									break;
+								case false:
+									if (!(checker2 in keyCodeSymbol)) {
+										this.moveCursor(lettersEnglish[checker2]);
+									} else {
+										this.moveCursor(keyCodeSymbol[checker2]);
+									}
+									break;
+							}
+
+					}
+					break;
+				case 'ru':
+					switch (this.caps) {
+						case true:
+							if (!(checker2 in keyCodeSymbolRu)) {
+								this.moveCursor(lettersRussianCaps[checker2]);
+							} else {
+								this.moveCursor(keyCodeSymbolRu[checker2]);
+							}
+							break;
+						case false:
+							switch (this.shift) {
+								case true:
+									if (!(checker2 in keyCodeSymbolShiftRu)) {
+										this.moveCursor(lettersRussianCaps[checker2]);
+									} else {
+										this.moveCursor(keyCodeSymbolShiftRu[checker2]);
+									}
+									break;
+								case false:
+									if (!(checker2 in keyCodeSymbolRu)) {
+										this.moveCursor(lettersRussian[checker2]);
+									} else {
+										this.moveCursor(keyCodeSymbolRu[checker2]);
+									}
+									break;
+							}
+					}
+					break;
+			}
+		}
+
+	}
+
+//cursors
+	moveCursor(obj) {
+		this.textarea.textContent = this.textarea.value.substring(0, this.caretPos) + obj + this.textarea.value.substring(this.caretPosEnd);
+		this.caretPos += this.textarea.textContent.length;
+		this.textarea.setSelectionRange(this.caretPos, this.caretPos);
+	}
+
 
 //enter
-let enter = document.createElement('div');
-enter.classList.add('k-key', 'item');
-enter.style = 'width: 150px;'
-enter.innerHTML = 'Enter';
-row3.appendChild(enter);
-
-enter.addEventListener('click',function () {
-	textarea.value+= '\n';
-	textarea.focus();
-});
-
-// tab.addEventListener('onkeypress', function (evt) {
-// 	evt.preventDefault();
-// 	evt.stopPropagation();
-// 	textarea.value += '\t';
-// 	tab.classList.add('.active-letter');
-// 	textarea.focus();
-// })
-
-
-// функция для вывода значений по клику на кнопки со значениями
-function toTextarea() {
-		imKey.forEach(function (x) {
-			x.addEventListener('click', function () {
-				// проверка на таб
-				if (x === tab) {
-					textarea.focus();
-
-					textarea.value += '\t';
-					tab.classList.add('.active-letter');
-					textarea.focus();
-					//проверка на капс
-				}
-				else
-					if (x === caps || x === shift || x === shiftRight || x === alt || x === altRight || x === win) {
-					textarea.value = textarea.value;
-					textarea.focus();
-				}
-				else {
-				textarea.value += x.textContent.trim();
-				textarea.focus();
-			}
-		})
-	})
-};
-
-toTextarea();
-
-	//Caps
-	// глючит
-	let flag = false;
-	//
-	caps.addEventListener('click', function pressCaps() {
-		if (flag === false) {
-			console.log('We big');
-			createCapsLockKeyboard();
-			caps.classList.add('active-letter');
-			checkActiveButtons.add('caps');
-			flag = true;
-			textarea.focus();
+	enter(event) {
+		let checker5;
+		if (event.type === 'click') {
+			checker5 = event.target.getAttribute('data-code');
+		} else {
+			checker5 = event.code;
 		}
-		else if (flag === true) {
-			console.log('We small');
-			createKeyboard();
-			caps.classList.remove('active-letter');
-			checkActiveButtons.delete('caps');
-			flag=false;
-			textarea.focus();
+		if (checker5 === 'Enter') {
+			this.moveCursor('\r\n');
 		}
-	});
-
-
-
-	//по клику на капс
-// 	if (event.code === 'CapsLock' ) {
-// 		console.log('drsehret');
-// 	}
-	//подсветить кнопку и сделать все кнопки  большими
-
-	// document.onkeypress = function(event) {
-	//
-	// 	let realCaps = document.querySelector('.item[data-key="'+event.keyCode+'"]');
-	//
-	// 	document.querySelectorAll('.item').forEach(function (element) {
-	// 		if(pushedButton === element) {
-	// 			pushedButton.classList.add('active-letter');
-	// 			function removeActive() {
-	// 				pushedButton.classList.remove('active-letter');
-	// 			}
-	// 			setTimeout(removeActive,  300);
-	// 		}
-	// 	});
-	// };
-
-
-
-//проверка на капс
-// 	if (checkActiveButtons.has(caps)) {
-// 		console.log('caps');
-// 	}
-
-
-//do big
-// 	let result = '';
-// 	let some = x.textContent.trim();
-// 	result = some.toUpperCase();
-// 	textarea.value += result;
-// 	textarea.focus();
-
-//do small
-
-	// textarea.value += x.textContent.trim();
-	// textarea.focus();
-
-
-
-//сделать чтобы backSpace удалял
-backSpace.addEventListener('click', function () {
-
-	if (textarea.value.length > 0) {
-		textarea.value = textarea.value.slice(0, -1);
-		textarea.focus();
-	}
-});
-
-
-let shift = document.querySelector('[data-key="16"]');
-
-
-	//функция для генерации кнопок
-	function generateButton(name, width, textOnButton, row) {
-		name.classList.add('k-key');
-		name.style = width;
-		name.innerHTML = textOnButton ;
-		row.appendChild(name);
 	}
 
-	//создан 4 ряд
+//backspace + delete
+	deletion(event) {
+		let checker3;
+		if (event.type === 'click') {
+			checker3 = event.target.getAttribute('data-code');
+		} else {
+			checker3 = event.code;
+		}
 
-	//shiftRight
-	let shiftRight = document.createElement('div');
-	generateButton(shiftRight, 'width:130px;', 'Shift', row4);
-	//arrowUp
-	let arrowUp = document.createElement('div');
-	generateButton(arrowUp, 'margin-left: 52px; width:50px;', '/\\', row4);
-
-
-	//5 ряд
-	function generateFifthRow() {
-		generateButton(cntr, 'width:90px;', 'Ctrl', row5);
-		generateButton(win, 'width:90px;', 'Win', row5);
-		generateButton(alt, 'width:90px;', 'Alt', row5);
-		generateButton(space, 'width:370px;', ' ', row5);
-		generateButton(altRight, 'width:90px;', 'Alt', row5);
-		generateButton(cntrRight, 'width:90px;', 'Ctrl', row5);
-		generateButton(arrowRight, 'margin-left:32px;width:50px;', '<', row5);
-		generateButton(arrowDown, 'width:50px;', 'v', row5);
-		generateButton(arrowLeft, 'width:50px;', '>', row5);
-	}
-	generateFifthRow();
-
-
-
-//подсветка кнопок
-
-	//подсветка по клику для клавиш
-	document.onkeypress = function(event) {
-
-		let pushedButton = document.querySelector('.item[data-key="'+event.keyCode+'"]');
-
-		document.querySelectorAll('.item').forEach(function (element) {
-			if(pushedButton === element) {
-				pushedButton.classList.add('active-letter');
-				function removeActive() {
-					pushedButton.classList.remove('active-letter');
+		switch (checker3) {
+			case "Backspace":
+				if (this.textarea.selectionStart === 0) {
+					return;
+				} else {
+					this.caretPos = this.textarea.selectionStart;
+					this.textarea.innerHTML = this.textarea.value.substring(0, this.caretPos - 1) + this.textarea.value.substring((this.caretPos), (this.textarea.value.length));
+					this.textarea.setSelectionRange(this.caretPos - 1, this.caretPos - 1);
 				}
-				setTimeout(removeActive,  300);
+
+				break;
+			case "Delete":
+				this.caretPos = this.textarea.selectionStart;
+				this.textarea.innerHTML = this.textarea.value.substring(0, this.caretPos) + this.textarea.value.substring((this.caretPos + 1), (this.textarea.value.length));
+				this.textarea.setSelectionRange(this.caretPos, this.caretPos);
+				break;
+		}
+	}
+
+//arrows
+	arrow(event) {
+		let checker4;
+		if (event.type === 'click' || event.type === 'mousedown') {
+			checker4 = event.target.getAttribute('data-code');
+		} else {
+			checker4 = event.code;
+		}
+		switch (checker4) {
+			case "ArrowRight":
+				this.textarea.selectionStart += 1;
+				console.log(this.caretPos, this.caretPosEnd);
+				break;
+			case "ArrowLeft":
+				this.textarea.selectionStart -= 1;
+				this.textarea.selectionEnd -= 1;
+				console.log(this.caretPos, this.caretPosEnd);
+				break;
+			case "ArrowUp":
+				this.textarea.textContent += "▲";
+				console.log(this.caretPos, this.caretPosEnd);
+				break;
+			case "ArrowDown":
+				this.textarea.textContent += "▼";
+				break;
+		}
+	}
+
+
+
+//space
+	space(event) {
+		let checker6;
+		if (event.type === 'click') {
+			checker6 = event.target.getAttribute('data-code');
+		} else {
+			checker6 = event.code;
+		}
+		if (checker6 === 'Space') {
+			this.moveCursor(' ');
+		}
+	}
+
+//tab
+	tab(event) {
+		let checker7;
+		if (event.type === 'click') {
+			checker7 = event.target.getAttribute('data-code');
+		} else {
+			checker7 = event.code;
+		}
+		if (checker7 === 'Tab') {
+			this.moveCursor('\t');
+		}
+	}
+
+
+	keydown(event) {
+		event.preventDefault();
+		let checker8;
+		if (event.type === 'mousedown') {
+			checker8 = event.target.getAttribute('data-code');
+		} else {
+			checker8 = event.code;
+		}
+		switch (checker8) {
+			case 'CapsLock':
+				switch (this.caps) {
+					case true:
+						this.caps = false;
+						this.LangCaseKb();
+						this.keyEl[checker8].classList.remove('active_key');
+						break;
+					case false:
+						this.caps = true;
+						this.LangCaseKb();
+						this.keyEl[checker8].classList.add('active_key');
+						break;
+				}
+				break;
+			case 'ShiftLeft':
+				this.shift = true;
+				this.LangCaseKb();
+				this.keyEl[checker8].classList.add('active_key');
+				break;
+			case 'ShiftRight':
+				this.shift = true;
+				this.LangCaseKb();
+				this.keyEl[checker8].classList.add('active_key');
+				break;
+			default:
+				this.keyEl[checker8].classList.add('active_key');
+				break;
+		}
+	}
+
+	keyup(event) {
+		event.preventDefault();
+		let checker9;
+		if (event.type === 'mouseup') {
+			checker9 = event.target.getAttribute('data-code');
+		} else {
+			checker9 = event.code;
+		}
+		switch (checker9) {
+			case 'ShiftLeft':
+				this.shift = false;
+				this.LangCaseKb();
+				this.keyEl[checker9].classList.remove('active_key');
+				break;
+			case 'ShiftRight':
+				this.shift = false;
+				this.LangCaseKb();
+				this.keyEl[checker9].classList.remove('active_key');
+				break;
+			case 'CapsLock':
+				break;
+			default:
+				this.keyEl[checker9].classList.remove('active_key');
+				break;
+		}
+	}
+
+
+	keyEvent() {
+		document.addEventListener('keydown', (event) => {
+			this.keydown(event);
+			this.switchLang(event);
+			this.printText(event);
+			this.deletion(event);
+			this.arrow(event);
+			this.enter(event);
+			this.space(event);
+			this.tab(event);
+			this.textarea.focus();
+		});
+
+		document.addEventListener('keyup', (event) => this.keyup(event));
+
+		this.keyboardWrapper.addEventListener('mousedown', (event) => {
+			if (event.target.getAttribute('data') === 'wrap' || event.target.getAttribute('data') === 'line') {
+			} else {
+				this.keydown(event);
+				this.textarea.focus();
 			}
 		});
 
-	};
-
-	//функция подсветки для кнопок по клику для функ клавиш
-	function lightOnClick(keyCode, button) {
-		if(event.code === keyCode ) {
-			button.classList.add('active-letter');
-			function removeActive() {
-				button.classList.remove('active-letter');
+		this.keyboardWrapper.addEventListener('mouseup', (event) => {
+			if (event.target.getAttribute('data') === 'wrap' || event.target.getAttribute('data') === 'line') {
+			} else {
+				this.keyup(event);
+				this.textarea.focus();
 			}
-			setTimeout(removeActive,  300);
-		}
+		});
+
+
+		this.keyboardWrapper.addEventListener('click', (event) => {
+			if (event.target.getAttribute('data') === 'wrap' || event.target.getAttribute('data') === 'line') {
+			} else {
+				this.deletion(event);
+				this.switchLang(event);
+				this.printText(event);
+				this.arrow(event);
+				this.tab(event);
+				this.enter(event);
+				this.textarea.focus();
+			}
+		});
 	}
+}
 
-	addEventListener('keydown', function (event) {
-		lightOnClick('ShiftLeft', shift);
-
-		lightOnClick('ShiftRight', shiftRight);
-
-		lightOnClick('ControlLeft', cntr);
-
-		lightOnClick('ControlRight', cntrRight);
-
-		lightOnClick('AltLeft', alt);
-
-		lightOnClick('AltRight', altRight);
-
-		lightOnClick('Enter', enter);
+window.onload = function () {
+	let keyboardBasic = new Keyboard();
+	keyboardBasic.keyboard();
+	keyboardBasic.kbButtons();
+	keyboardBasic.keyObjectClassification();
+	keyboardBasic.LangCaseKb();
+	keyboardBasic.keyEvent();
+	keyboardBasic.textarea.focus();
+};
 
 
-		lightOnClick('Tab', tab);
+const keyWhich = [192, 49, 50, 51, 52, 53, 54, 55, 56, 57, 48, 189, 187, 8,
+	9, 81, 87, 69, 82, 84, 89, 85, 73, 79, 80, 219, 221, 220, 46,
+	20, 65, 83, 68, 70, 71, 72, 74, 75, 76, 186, 222, 13,
+	16, 90, 88, 67, 86, 66, 78, 77, 188, 190, 191, 38, 16,
+	17, 91, 18, 32, 18, 37, 40, 39, 17
+];
 
-		lightOnClick('Backspace', backSpace);
-
-	});
-
-
-//
-// //на engl
-// 		let keyboardEnglish = [167, 49, 50, 51, 52, 53, 54, 55, 56, 57,
-// 			48, 45, 61, 113, 119, 101, 114, 116, 121, 117, 105, 111, 112,
-// 			91, 93, 97, 115, 100, 102, 103, 104, 106, 107, 108, 59, 39, 92,
-// 			96, 122, 120, 99, 118, 98, 110, 109, 44, 46, 47, 32];
-//
-//
-// //на русском
-// 		const keyboard = [62, 49, 50, 51, 52, 53, 54, 55, 56, 57,
-// 			48, 45, 61, 1081, 1094, 1091, 1082, 1077, 1085, 1075,
-// 			1096, 1097, 1079, 1093, 1098, 1092, 1099, 1074, 1072, 1087,
-// 			1088, 1086, 1083, 1076, 1078, 1101, 1105, 93, 1103, 1095,
-// 			1089, 1084, 1080, 1090, 1100, 1073, 1102, 47, 32];
-//
-
-//
-// const ruKeyCodes = {
-// 	81: 'й',
-// 	87: 'ц',
-// 	69: 'у',
-// 	82: 'к',
-// 	84: 'е',
-// 	89: 'н',
-// 	85: 'г',
-// 	73: 'ш',
-// 	79: 'щ',
-// 	80: 'з',
-// 	219: 'х',
-// 	221: 'ъ',
-// 	65: 'ф',
-// 	83: 'ы',
-// 	68: 'в',
-// 	70: 'а',
-// 	71: 'п',
-// 	72: 'р',
-// 	74: 'о',
-// 	75: 'л',
-// 	76: 'д',
-// 	186: 'ж',
-// 	222: 'э',
-// 	90: 'я',
-// 	88: 'ч',
-// 	67: 'с',
-// 	86: 'м',
-// 	66: 'и',
-// 	78: 'т',
-// 	77: 'ь',
-// 	188: 'б',
-// 	190: 'ю',
-// 	192: 'ё',
-// 	32: ' ',
-// 	91: '', // left cmd
-// 	9:'', //tab
-// 	20:'',//CAPS
-// 	16:'',//shift
-// 	17: '',//cntrl
-// 	18: '',//alt left + right
-// 	93:'',//right cmd
-// };
-//
-// const enKeyCodes = {
-// 	81: 'q',
-// 	87: 'w',
-// 	69: 'e',
-// 	82: 'r',
-// 	84: 't',
-// 	89: 'y',
-// 	85: 'u',
-// 	73: 'i',
-// 	79: 'o',
-// 	80: 'p',
-// 	65: 'a',
-// 	83: 's',
-// 	68: 'd',
-// 	70: 'f',
-// 	71: 'g',
-// 	72: 'h',
-// 	74: 'j',
-// 	75: 'k',
-// 	76: 'l',
-// 	90: 'z',
-// 	88: 'x',
-// 	67: 'c',
-// 	86: 'v',
-// 	66: 'b',
-// 	78: 'n',
-// 	77: 'm',
-// 	32: ' ',
-// 	91: '', // left cmd
-// 	9:'', //tab
-// 	20:'',//CAPS
-// 	16:'',//shift
-// 	17: '',//cntrl
-// 	18: '',//alt left + right
-// 	93:'',//right cmd
-// };
+const keysFunction = ["Backspace",
+	"Tab", "Delete",
+	"CapsLock", "Enter",
+	"Shift", "▲", "Shift",
+	"Ctrl", "Win", "Alt", "", "Alt", "◄", "▼", "►", "Ctrl"
+];
 
 
+const lettersEnglish = {
+	"KeyQ": 'q',
+	"KeyW": 'w',
+	"KeyE": 'e',
+	"KeyR": 'r',
+	"KeyT": 't',
+	"KeyY": 'y',
+	"KeyU": 'u',
+	"KeyI": 'i',
+	"KeyO": 'o',
+	"KeyP": 'p',
+	"KeyA": 'a',
+	"KeyS": 's',
+	"KeyD": 'd',
+	"KeyF": 'f',
+	"KeyG": 'g',
+	"KeyH": 'h',
+	"KeyJ": 'j',
+	"KeyK": 'k',
+	"KeyL": 'l',
+	"KeyZ": 'z',
+	"KeyX": 'x',
+	"KeyC": 'c',
+	"KeyV": 'v',
+	"KeyB": 'b',
+	"KeyN": 'n',
+	"KeyM": 'm',
+};
+
+const lettersEnglishCaps = {
+	"KeyQ": 'Q',
+	"KeyW": 'W',
+	"KeyE": 'E',
+	"KeyR": 'R',
+	"KeyT": 'T',
+	"KeyY": 'Y',
+	"KeyU": 'U',
+	"KeyI": 'I',
+	"KeyO": 'O',
+	"KeyP": 'P',
+	"KeyA": 'A',
+	"KeyS": 'S',
+	"KeyD": 'D',
+	"KeyF": 'F',
+	"KeyG": 'G',
+	"KeyH": 'H',
+	"KeyJ": 'J',
+	"KeyK": 'K',
+	"KeyL": 'L',
+	"KeyZ": 'Z',
+	"KeyX": 'X',
+	"KeyC": 'C',
+	"KeyV": 'V',
+	"KeyB": 'B',
+	"KeyN": 'N',
+	"KeyM": 'M',
+};
+
+const lettersRussian = {
+	"Backquote": "ё",
+	"KeyQ": 'й',
+	"KeyW": 'ц',
+	"KeyE": 'у',
+	"KeyR": 'к',
+	"KeyT": 'е',
+	"KeyY": 'н',
+	"KeyU": 'г',
+	"KeyI": 'ш',
+	"KeyO": 'щ',
+	"KeyP": 'з',
+	"BracketLeft": 'х',
+	"BracketRight": 'ъ',
+	"KeyA": 'ф',
+	"KeyS": 'ы',
+	"KeyD": 'в',
+	"KeyF": 'а',
+	"KeyG": 'п',
+	"KeyH": 'р',
+	"KeyJ": 'о',
+	"KeyK": 'л',
+	"KeyL": 'д',
+	"Semicolon": 'ж',
+	"Quote": 'э',
+	"KeyZ": 'я',
+	"KeyX": 'ч',
+	"KeyC": 'с',
+	"KeyV": 'м',
+	"KeyB": 'и',
+	"KeyN": 'т',
+	"KeyM": 'ь',
+	"Comma": 'б',
+	"Period": 'ю',
+};
+
+const lettersRussianCaps = {
+	"Backquote": "Ё",
+	"KeyQ": 'Й',
+	"KeyW": 'Ц',
+	"KeyE": 'У',
+	"KeyR": 'К',
+	"KeyT": 'Е',
+	"KeyY": 'Н',
+	"KeyU": 'Г',
+	"KeyI": 'Ш',
+	"KeyO": 'Щ',
+	"KeyP": 'З',
+	"BracketLeft": 'Х',
+	"BracketRight": 'Ъ',
+	"KeyA": 'Ф',
+	"KeyS": 'Ы',
+	"KeyD": 'В',
+	"KeyF": 'А',
+	"KeyG": 'П',
+	"KeyH": 'Р',
+	"KeyJ": 'О',
+	"KeyK": 'Л',
+	"KeyL": 'Д',
+	"Semicolon": 'Ж',
+	"Quote": 'Э',
+	"KeyZ": 'Я',
+	"KeyX": 'Ч',
+	"KeyC": 'С',
+	"KeyV": 'М',
+	"KeyB": 'И',
+	"KeyN": 'Т',
+	"KeyM": 'Ь',
+	"Comma": 'Б',
+	"Period": 'Ю',
+};
+
+
+const keyCodeSymbol = {
+	"Backquote": '`',
+	"Digit1": '1',
+	"Digit2": '2',
+	"Digit3": '3',
+	"Digit4": '4',
+	"Digit5": '5',
+	"Digit6": '6',
+	"Digit7": '7',
+	"Digit8": '8',
+	"Digit9": '9',
+	"Digit0": '0',
+	"Minus": '-',
+	"Equal": '=',
+	"BracketLeft": '[',
+	"BracketRight": ']',
+	"Backslash": '\\',
+	"Semicolon": ';',
+	"Quote": '\'',
+	"Comma": ',',
+	"Period": '.',
+	"Slash": '/',
+};
+
+const keyCodeSymbolShift = {
+	"Backquote": '~',
+	"Digit1": '!',
+	"Digit2": '@',
+	"Digit3": '#',
+	"Digit4": '$',
+	"Digit5": '%',
+	"Digit6": '^',
+	"Digit7": '&',
+	"Digit8": '*',
+	"Digit9": '(',
+	"Digit0": ')',
+	"Minus": '_',
+	"Equal": '+',
+	"BracketLeft": '{',
+	"BracketRight": '}',
+	"Backslash": '|',
+	"Semicolon": ':',
+	"Quote": '"',
+	"Comma": '<',
+	"Period": '>',
+	"Slash": '?',
+};
+
+const keyCodeSymbolRu = {
+	"Backquote": 'ё',
+	"Digit1": '1',
+	"Digit2": '2',
+	"Digit3": '3',
+	"Digit4": '4',
+	"Digit5": '5',
+	"Digit6": '6',
+	"Digit7": '7',
+	"Digit8": '8',
+	"Digit9": '9',
+	"Digit0": '0',
+	"Minus": '-',
+	"Equal": '=',
+	"Backslash": '\\',
+	"Slash": '.',
+};
+
+const keyCodeSymbolShiftRu = {
+	"Backquote": 'Ё',
+	"Digit1": '!',
+	"Digit2": '"',
+	"Digit3": '№',
+	"Digit4": ';',
+	"Digit5": '%',
+	"Digit6": ':',
+	"Digit7": '?',
+	"Digit8": '*',
+	"Digit9": '(',
+	"Digit0": ')',
+	"Minus": '_',
+	"Equal": '+',
+	"Backslash": '/',
+	"Slash": ',',
+};
+
+const keyCodeLetterEng = ["KeyQ", "KeyW", "KeyE", "KeyR", "KeyT", "KeyY", "KeyU", "KeyI", "KeyO", "KeyP",
+	"KeyA", "KeyS", "KeyD", "KeyF", "KeyG", "KeyH", "KeyJ", "KeyK", "KeyL",
+	"KeyZ", "KeyX", "KeyC", "KeyV", "KeyB", "KeyN", "KeyM",
+];
+
+const keyCodeNumEng = ["Backquote", "Digit1", "Digit2", "Digit3", "Digit4", "Digit5", "Digit6", "Digit7", "Digit8", "Digit9", "Digit0", "Minus", "Equal",
+	"BracketLeft", "BracketRight", "Backslash",
+	"Semicolon", "Quote",
+	"Comma", "Period", "Slash"
+];
+
+const keyCodeFunct = ["Backspace",
+	"Tab", "Delete",
+	"CapsLock", "Enter",
+	"ShiftLeft", "ArrowUp", "ShiftRight",
+	"ControlLeft", "MetaLeft", "AltLeft", "Space", "AltRight", "ArrowLeft", "ArrowDown", "ArrowRight", "ControlRight"
+];
+
+const keyCodeLetterRu = ["Backquote",
+	"KeyQ", "KeyW", "KeyE", "KeyR", "KeyT", "KeyY", "KeyU", "KeyI", "KeyO", "KeyP", "BracketLeft", "BracketRight",
+	"KeyA", "KeyS", "KeyD", "KeyF", "KeyG", "KeyH", "KeyJ", "KeyK", "KeyL", "Semicolon", "Quote",
+	"KeyZ", "KeyX", "KeyC", "KeyV", "KeyB", "KeyN", "KeyM", "Comma", "Period",
+];
+
+const keyCodeNumRu = ["Backquote", "Digit1", "Digit2", "Digit3", "Digit4", "Digit5", "Digit6", "Digit7", "Digit8", "Digit9", "Digit0", "Minus", "Equal",
+	"Backslash",
+	"Slash",
+];
+
+const keyCodes = ["Backquote", "Digit1", "Digit2", "Digit3", "Digit4", "Digit5", "Digit6", "Digit7", "Digit8", "Digit9", "Digit0", "Minus", "Equal", "Backspace",
+	"Tab", "KeyQ", "KeyW", "KeyE", "KeyR", "KeyT", "KeyY", "KeyU", "KeyI", "KeyO", "KeyP", "BracketLeft", "BracketRight", "Backslash", "Delete",
+	"CapsLock", "KeyA", "KeyS", "KeyD", "KeyF", "KeyG", "KeyH", "KeyJ", "KeyK", "KeyL", "Semicolon", "Quote", "Enter",
+	"ShiftLeft", "KeyZ", "KeyX", "KeyC", "KeyV", "KeyB", "KeyN", "KeyM", "Comma", "Period", "Slash", "ArrowUp", "ShiftRight",
+	"ControlLeft", "MetaLeft", "AltLeft", "Space", "AltRight", "ArrowLeft", "ArrowDown", "ArrowRight", "ControlRight"
+];
