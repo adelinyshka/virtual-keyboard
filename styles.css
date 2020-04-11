@@ -11,6 +11,7 @@ body {
 	flex-direction: column;
 	justify-content: center;
 	margin-top: 30px;
+	box-sizing: border-box;
 }
 
 .title {
@@ -39,8 +40,6 @@ a.small-info {
 	font-weight: bold;
 }
 
-
-
 .textarea {
 	width: 992px;
 	margin: 0 auto;
@@ -62,7 +61,8 @@ a.small-info {
 .keyboard_line {
 	display: flex;
 	justify-content: space-between;
-	margin-bottom: 1%;
+	margin-bottom: 5px;
+	box-sizing: border-box;
 }
 
 .keyboard-wrapper {
@@ -88,7 +88,6 @@ a.small-info {
 	border: 1px solid #2e302f;
 	border-radius: 9px;
 	vertical-align: top;
-	padding: 0;
 	-webkit-tap-highlight-color: transparent;
 	position: relative;
 	max-width: 90px;
@@ -97,18 +96,19 @@ a.small-info {
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
+	box-sizing: border-box;
+	padding: 1px;
 }
 
 
 
 .special_key {
-	width: 30%;
-	max-width: 150px;
 	font-family: sans-serif;
 	font-size: 20px;
 	font-weight: 500;
 	text-align: center;
 	user-select: none;
+	width: 120px;
 	height: 50px;
 	color: #fff;
 	background: #08554c;
@@ -117,98 +117,53 @@ a.small-info {
 	border: 1px solid #2e302f;
 	border-radius: 9px;
 	vertical-align: top;
-	padding: 0;
 	-webkit-tap-highlight-color: transparent;
 	position: relative;
+	max-width: 150px;
 	outline: none;
 	cursor: pointer;
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
+	box-sizing: border-box;
+	padding: 1px;
 }
-
-.special_key:hover {
-	background: #fae097;
-	box-shadow: inset 3px 9px 10px #989970, 2px 1px 0px #465f4e;
-	border: 1px solid #000000;
-	color: black;
-	/*animation: shadow 0.2s alternate;*/
-}
-
 
 .active_key {
 	background: #fae097;
-	box-shadow: inset 3px 9px 10px #989970, 2px 1px 0px #465f4e,
-	5px 4px 0px transparent, inset -6px -5px 10px transparent;
-	border: 1px solid #000000;
+	box-shadow:
+		inset 3px 9px 10px #989970,
+		2px 1px 0px #465f4e,
+		5px 4px 0px transparent,
+		inset -6px -5px 10px transparent;
+	border: 2px solid #000000;
 	color: black;
 	animation: shadow 0.2s alternate;
+	box-sizing: border-box;
+	padding: 0px;
 }
+
 @keyframes shadow {
-	from {box-shadow: 5px 4px 0px #0f351b, inset -6px -5px 10px #102d1b, inset 6px 5px 10px #6b7774;;
-		border: 1px solid #3e4e44;}
-	50% {box-shadow: 2px 2px 0px #575871;
-		border: 1px solid #225E3C;}
-	to {box-shadow: inset 3px 9px 10px #8aaf99,
-	2px 1px 0px #0f351b;;
-		border: 1px solid #697f71;}
-}
+	from {
+		box-shadow: 5px 4px 0px #0f351b,
+								inset -6px -5px 10px #102d1b,
+								inset 6px 5px 10px #6b7774;
+		border: 2px solid #3e4e44;
+		padding: 0;
+	}
 
-.text_message {
-	display: block;
-	position: absolute;
-	width: 18%;
-	top: 0%;
-	left: -27%;
-	padding: 12px 25px;
-	border: 5px solid #c91861;
-	border-radius: 71px;
-	font-family: 'Montserrat';
-	font-size: 1.2em;
-	text-align: center;
-	color: white;
-	background-color: #ffffff85;
-}
-
-.text_message::after{
-	content: '\f6be';
-	font-family: FontAwesome;
-	position: absolute;
-	top: 4%;
-	left: 17%;
-	color: #3d0063;
-	font-size: 1.66em;
-}
-
-.lang_message {
-	display: block;
-	position: absolute;
-	width: 18%;
-	top: 13%;
-	left: -27%;
-	padding: 10px 25px;
-	border: 5px solid #e71d46;
-	border-radius: 47px;
-	font-family: 'Montserrat';
-	font-size: 1.1em;
-	color: white;
-	background-color: #ffffff85;
-}
-
-.contact_message {
-	display: block;
-	position: absolute;
-	width: 18%;
-	top: 41%;
-	left: -27%;
-	text-align: center;
-	padding: 5px 25px;
-	border: 5px solid #e71d46;
-	border-radius: 36px;
-	font-family: 'Montserrat';
-	font-size: 1.2em;
-	color: white;
-	background-color: #ffffff85;
+	50% {
+		box-shadow: 2px 2px 0px #575871,
+								5px 4px 0px transparent;
+		border: 2px solid #225E3C;
+		padding: 0;
+	}
+	to {
+		box-shadow: inset 3px 9px 10px #8aaf99,
+								2px 1px 0px #0f351b;
+		border: 2px solid #697f71;
+		padding: 0;
+	}
 }
 
 .special_key[data-code='Space'] {
