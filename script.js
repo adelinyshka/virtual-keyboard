@@ -39,6 +39,13 @@ class Keyboard {
 			' dubinnikova. Спасибо, что проверяете';
 		document.body.append(this.info);
 
+//small info
+		this.info2 = document.createElement('a');
+		this.info2.classList.add('small-info');
+		this.info2.setAttribute('href', 'https://rolling-scopes-school.github.io/checklist/')
+		this.info2.innerText = 'Кросс-чек для проверки работы';
+		document.body.prepend(this.info2);
+
 //textarea
 		this.textarea = document.createElement('textarea');
 		this.textarea.classList.add('textarea');

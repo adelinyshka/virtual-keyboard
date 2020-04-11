@@ -2,3 +2,5 @@
 
 Работа залита на netlify тк создала новую ветку gh-pages и туда все
 перенесла, как сказано в задании.
+
+[Кросс-чек для проверки работы](https://rolling-scopes-school.github.io/checklist/)
