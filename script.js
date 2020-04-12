@@ -18,6 +18,7 @@ class Keyboard {
 //create keyboard
 	keyboard() {
 
+
 // wrapper
 		this.wrapper = document.createElement('div');
 		this.wrapper.classList.add('wrapper');
@@ -285,7 +286,6 @@ class Keyboard {
 
 
 
-
 //textarea
 	printText(event) {
 		event.preventDefault();
@@ -384,6 +384,7 @@ class Keyboard {
 		}
 	}
 
+
 //backspace + delete
 	deletion(event) {
 		let checker3;
@@ -411,6 +412,8 @@ class Keyboard {
 				break;
 		}
 	}
+
+
 
 //arrows
 	arrow(event) {
@@ -455,6 +458,8 @@ class Keyboard {
 		}
 	}
 
+
+
 //tab
 	tab(event) {
 		let checker7;
@@ -469,12 +474,14 @@ class Keyboard {
 	}
 
 
+
 	keydown(event) {
 		event.preventDefault();
 		let checker8;
 		if (event.type === 'mousedown') {
 			checker8 = event.target.getAttribute('data-code');
-		} else {
+		}
+		else {
 			checker8 = event.code;
 		}
 		switch (checker8) {
@@ -502,6 +509,10 @@ class Keyboard {
 				this.LangCaseKb();
 				this.keyEl[checker8].classList.add('active_key');
 				break;
+			case 'OSRight':
+				break;
+			case 'OSLeft':
+				break;
 			default:
 				this.keyEl[checker8].classList.add('active_key');
 				break;
@@ -528,6 +539,10 @@ class Keyboard {
 				this.keyEl[checker9].classList.remove('active_key');
 				break;
 			case 'CapsLock':
+				break;
+			case 'OSRight':
+				break;
+			case 'OSLeft':
 				break;
 			default:
 				this.keyEl[checker9].classList.remove('active_key');
