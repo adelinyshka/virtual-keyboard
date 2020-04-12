@@ -1,0 +1,6 @@
+node_modules/
+.idea/
+.eslintrc
+# .gitignore
+#package-lock.json
+#package.json
