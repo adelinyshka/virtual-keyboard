@@ -286,6 +286,7 @@ class Keyboard {
 
 
 
+
 //textarea
 	printText(event) {
 		event.preventDefault();
@@ -553,15 +554,21 @@ class Keyboard {
 
 	keyEvent() {
 		document.addEventListener('keydown', (event) => {
-			this.keydown(event);
-			this.switchLang(event);
-			this.printText(event);
-			this.deletion(event);
-			this.arrow(event);
-			this.enter(event);
-			this.space(event);
-			this.tab(event);
-			this.textarea.focus();
+		 if (event.code === 'OSRight' || event.code === 'OSLeft' ){
+			 console.log('this key works only on Mac and not presented here')
+		 }
+		else {
+				this.keydown(event);
+				this.switchLang(event);
+				this.printText(event);
+				this.deletion(event);
+				this.arrow(event);
+				this.enter(event);
+				this.space(event);
+				this.tab(event);
+				this.textarea.focus();
+			}
+
 		});
 
 		document.addEventListener('keyup', (event) => this.keyup(event));
